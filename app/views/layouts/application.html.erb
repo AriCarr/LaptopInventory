@@ -1,27 +1,5 @@
 <!DOCTYPE html>
 <html>
-<nav class="navbar navbar-inverse">
-  <div class="container">
-    <div class="navbar-header">
-      <%= link_to 'LaptopInventory', root_path, class: 'navbar-brand' %>
-    </div>
-    <div id="navbar">
-      <ul class="nav navbar-nav">
-
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<div class="container">
-  <% flash.each do |key, value| %>
-    <div class="alert alert-<%= key %>">
-      <%= value %>
-    </div>
-  <% end %>
-
-  <%= yield %>
-</div>
   <head>
     <title>LaptopInventory</title>
     <%= csrf_meta_tags %>
