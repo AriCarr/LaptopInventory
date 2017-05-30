@@ -9,4 +9,18 @@ class SessionsController < ApplicationController
     end
   redirect_to root_path
   end
+
+  def login_local
+    session[:user_id] = params["user_id"]
+    @user = User.find(params["user_id"])
+    redirect_to root_path
+  end
+
+  def destroy
+    if current_user
+      session.delete(:user_id)
+      flash[:success] = 'See you!'
+    end
+    redirect_to root_path
+  end
 end

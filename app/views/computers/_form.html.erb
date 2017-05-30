@@ -1,0 +1,67 @@
+<%= form_for(computer) do |f| %>
+  <% if computer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(computer.errors.count, "error") %> prohibited this computer from being saved:</h2>
+
+      <ul>
+      <% computer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :active %>
+    <%= f.check_box :active %>
+  </div>
+
+  <div class="field">
+    <%= f.label :owner %>
+    <%= f.text_field :owner %>
+  </div>
+
+  <div class="field">
+    <%= f.label :manufacturer %>
+    <%= f.text_field :manufacturer %>
+  </div>
+
+  <div class="field">
+    <%= f.label :model %>
+    <%= f.text_field :model %>
+  </div>
+
+  <div class="field">
+    <%= f.label :serial %>
+    <%= f.text_field :serial %>
+  </div>
+
+  <div class="field">
+    <%= f.label :product %>
+    <%= f.text_field :product %>
+  </div>
+
+  <div class="field">
+    <%= f.label :space %>
+    <%= f.number_field :space %>
+  </div>
+
+  <div class="field">
+    <%= f.label :processor %>
+    <%= f.text_field :processor %>
+  </div>
+
+  <div class="field">
+    <%= f.label :ram %>
+    <%= f.text_field :ram %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

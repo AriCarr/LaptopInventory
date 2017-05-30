@@ -14,16 +14,14 @@
       <%= link_to 'FSE Equipment Inventory', root_path, class: 'navbar-brand' %>
     </div>
     <div id="navbar">
+      <ul class="nav navbar-nav pull-right">
       <% if current_user %>
-        <ul class="nav navbar-nav pull-right">
-          <li><%= image_tag current_user.image_url, alt: current_user.name %></li>
+          <li><%= link_to current_user.name, root_path %></li>
           <li><%= link_to 'Log Out', logout_path, method: :delete %></li>
-        </ul>
       <% else %>
-        <ul class="nav navbar-nav">
           <li><%= link_to 'Log in with Office 365', '/auth/office365' %></li>
-        </ul>
       <% end %>
+      <ul>
     </div>
   </div>
 </nav>
