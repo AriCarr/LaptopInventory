@@ -8,25 +8,16 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <nav class="navbar navbar-inverse">
-  <div class="container">
-    <div class="navbar-header">
-      <%= link_to 'FSE Equipment Inventory', root_path, class: 'navbar-brand' %>
-    </div>
-    <div id="navbar">
-      <ul class="nav navbar-nav pull-right">
-      <% if current_user %>
-          <li><%= link_to current_user.name, root_path %></li>
-          <li><%= link_to 'Log Out', logout_path, method: :delete %></li>
-      <% else %>
-          <li><%= link_to 'Log in with Office 365', '/auth/office365' %></li>
-      <% end %>
-      <ul>
-    </div>
-  </div>
-</nav>
+  <%= render 'layouts/header' %>
 
-  <body>
+  <div class="container">
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>">
+        <%= value %>
+      </div>
+    <% end %>
+
     <%= yield %>
+  </div>
   </body>
 </html>

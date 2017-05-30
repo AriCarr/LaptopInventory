@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20170530175050) do
     t.integer  "space"
     t.float    "processor"
     t.float    "ram"
+    t.integer  "computer_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end

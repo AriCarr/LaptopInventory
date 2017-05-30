@@ -1,3 +1,4 @@
 <div class="jumbotron">
   <h1>Welcome!</h1>
+  <p> <% if !current_user %>Authenticate via <strong><%= link_to 'Office 365', '/auth/office365' %></strong> <% else %> Click a link in the navigation bar <% end %> to get started!</p>
 </div>

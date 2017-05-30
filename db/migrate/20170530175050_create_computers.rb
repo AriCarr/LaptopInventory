@@ -11,6 +11,7 @@ class CreateComputers < ActiveRecord::Migration[5.0]
       t.integer :space
       t.float :processor
       t.float :ram
+      t.integer :computer_id
 
       t.timestamps
     end

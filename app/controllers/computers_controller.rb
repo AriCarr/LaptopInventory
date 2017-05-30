@@ -40,6 +40,10 @@ class ComputersController < ApplicationController
   # PATCH/PUT /computers/1
   # PATCH/PUT /computers/1.json
   def update
+    parent = @computer.dup
+    parent.active = false
+    parent.save!
+    @computer.parent = parent
     respond_to do |format|
       if @computer.update(computer_params)
         format.html { redirect_to @computer, notice: 'Computer was successfully updated.' }
