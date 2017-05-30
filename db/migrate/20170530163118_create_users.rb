@@ -4,7 +4,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :provider
       t.string :uid
       t.string :name
-      t.string :username
+      t.string :email
       t.boolean :can_edit, default: false
       t.string :provider, null: false
       t.string :uid, null: false
