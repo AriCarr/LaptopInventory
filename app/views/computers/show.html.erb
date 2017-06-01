@@ -7,12 +7,7 @@
 
 <p>
   <strong>Active:</strong>
-  <%= @computer.active %>
-</p>
-
-<p>
-  <strong>Available:</strong>
-  <%= @computer.available %>
+  <%= @computer.status.humanize %>
 </p>
 
 <p>

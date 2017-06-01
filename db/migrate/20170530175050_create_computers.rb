@@ -2,8 +2,11 @@ class CreateComputers < ActiveRecord::Migration[5.0]
   def change
     create_table :computers do |t|
       t.string :name
-      t.boolean :active
-      t.boolean :available
+      t.integer :status, default: 0
+        # 1 = in use
+        # 2 = available
+        # 3 = destroyed
+      t.boolean :history, default: false
       t.string :owner
       t.string :manufacturer
       t.string :model

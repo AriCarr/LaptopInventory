@@ -17,13 +17,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :active %>
-    <%= f.check_box :active %>
-  </div>
-
-  <div class="field">
-    <%= f.label :available %>
-    <%= f.check_box :available %>
+      <%= f.label :status %>
+      <%= f.select :status, options_for_select(@statuses.collect { |s| [s[0].humanize, s[0]] }, selected: @computer.status), {} %>
   </div>
 
   <div class="field">

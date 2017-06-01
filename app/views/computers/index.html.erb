@@ -6,8 +6,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Active</th>
-      <th>Available</th>
+      <th>Status</th>
       <th>Owner</th>
       <th>Manufacturer</th>
       <th>Model</th>
@@ -21,11 +20,10 @@
   </thead>
 
   <tbody>
-    <% @computers.each do |computer| %>
+    <% @computers.where(status: 1).each do |computer| %>
       <tr>
         <td><%= computer.name %></td>
-        <td><%= computer.active %></td>
-        <td><%= computer.available %></td>
+        <td><%= computer.status.humanize %></td>
         <td><%= computer.owner %></td>
         <td><%= computer.manufacturer %></td>
         <td><%= computer.model %></td>

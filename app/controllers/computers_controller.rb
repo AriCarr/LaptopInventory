@@ -1,5 +1,6 @@
 class ComputersController < ApplicationController
   before_action :set_computer, only: [:show, :edit, :update, :destroy]
+  before_action :gather_statuses
 
   # GET /computers
   # GET /computers.json
@@ -45,10 +46,12 @@ class ComputersController < ApplicationController
   # PATCH/PUT /computers/1
   # PATCH/PUT /computers/1.json
   def update
-    parent = @computer.dup
-    parent.active = false
-    parent.save!
-    @computer.parent = parent
+    if !@computer.history?
+      parent = @computer.dup
+      parent.history = true
+      parent.save!
+      @computer.parent = parent
+    end
     respond_to do |format|
       if @computer.update(computer_params)
         format.html { redirect_to @computer, notice: 'Computer was successfully updated.' }
@@ -76,8 +79,12 @@ class ComputersController < ApplicationController
       @computer = Computer.find(params[:id])
     end
 
+    def gather_statuses
+      @statuses = Computer.statuses
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def computer_params
-      params.require(:computer).permit(:name, :active, :available, :owner, :manufacturer, :model, :serial, :product, :space, :processor, :ram)
+      params.require(:computer).permit(:name, :status, :owner, :manufacturer, :model, :serial, :product, :space, :processor, :ram)
     end
 end

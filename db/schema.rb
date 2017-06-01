@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(version: 20170530175050) do
 
   create_table "computers", force: :cascade do |t|
     t.string   "name"
-    t.boolean  "active"
-    t.boolean  "available"
+    t.integer  "status",       default: 0
+    t.boolean  "history"
     t.string   "owner"
     t.string   "manufacturer"
     t.string   "model"
@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(version: 20170530175050) do
     t.float    "processor"
     t.float    "ram"
     t.integer  "computer_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "users", force: :cascade do |t|
