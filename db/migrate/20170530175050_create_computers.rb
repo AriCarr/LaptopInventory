@@ -8,7 +8,7 @@ class CreateComputers < ActiveRecord::Migration[5.0]
         # 3 = destroyed
       t.boolean :history, default: false
       t.string :owner
-      t.string :manufacturer
+      t.integer :manufacturer
       t.string :model
       t.string :serial
       t.string :product

@@ -1,0 +1,4 @@
+<hr>
+<h4> <%= "#{computer.updated_at.month}/#{computer.updated_at.day}/#{computer.updated_at.year}" %> </h4>
+<h5> <%= "#{computer.owner}'s #{computer.manufacturer} #{computer.model} (#{computer.status.humanize})" %> </h5>
+<h5> <%= "RAM: #{computer.ram} GB | Storage: #{computer.space} GB | Processor: #{computer.processor} GHz" %> </h5>

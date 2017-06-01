@@ -1,6 +1,6 @@
 class ComputersController < ApplicationController
   before_action :set_computer, only: [:show, :edit, :update, :destroy]
-  before_action :gather_statuses
+  before_action :gather_enums
 
   # GET /computers
   # GET /computers.json
@@ -31,7 +31,7 @@ class ComputersController < ApplicationController
 
       respond_to do |format|
         if @computer.save
-          format.html { redirect_to @computer, notice: 'Computer was successfully created.' }
+          format.html { redirect_to @computer }
           format.json { render :show, status: :created, location: @computer }
         else
           format.html { render :new }
@@ -46,7 +46,7 @@ class ComputersController < ApplicationController
   # PATCH/PUT /computers/1
   # PATCH/PUT /computers/1.json
   def update
-    if !@computer.history?
+    if @computer.history != true
       parent = @computer.dup
       parent.history = true
       parent.save!
@@ -54,7 +54,7 @@ class ComputersController < ApplicationController
     end
     respond_to do |format|
       if @computer.update(computer_params)
-        format.html { redirect_to @computer, notice: 'Computer was successfully updated.' }
+        format.html { redirect_to @computer }
         format.json { render :show, status: :ok, location: @computer }
       else
         format.html { render :edit }
@@ -79,12 +79,13 @@ class ComputersController < ApplicationController
       @computer = Computer.find(params[:id])
     end
 
-    def gather_statuses
+    def gather_enums
       @statuses = Computer.statuses
+      @manufacturers = Computer.manufacturers
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def computer_params
-      params.require(:computer).permit(:name, :status, :owner, :manufacturer, :model, :serial, :product, :space, :processor, :ram)
+      params.require(:computer).permit(:name, :status, :history, :owner, :manufacturer, :model, :serial, :product, :space, :processor, :ram)
     end
 end

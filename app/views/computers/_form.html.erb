@@ -12,23 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="field">
-      <%= f.label :status %>
-      <%= f.select :status, options_for_select(@statuses.collect { |s| [s[0].humanize, s[0]] }, selected: @computer.status), {} %>
-  </div>
-
-  <div class="field">
-    <%= f.label :owner %>
+    <%= f.label :owner, "Your name" %>
     <%= f.text_field :owner %>
   </div>
 
   <div class="field">
-    <%= f.label :manufacturer %>
-    <%= f.text_field :manufacturer %>
+    <%= f.label :status, "Computer's current status" %>
+    <%= f.select :status, options_for_select(@statuses.collect { |s| [s[0].humanize, s[0]] }, selected: @computer.status), {} %>
+  </div>
+
+  <div class="field">
+    <%= f.label :manufacturer, "Manufacturer" %>
+    <%= f.select :manufacturer, options_for_select(@manufacturers.collect { |s| [s[0], s[0]] }, selected: @computer.manufacturer), {} %>
   </div>
 
   <div class="field">
@@ -37,28 +32,55 @@
   </div>
 
   <div class="field">
-    <%= f.label :serial %>
+    <%= f.label :serial, "Service tag/Serial number\n" %>
     <%= f.text_field :serial %>
   </div>
 
+  <div>
+      You can find the serial number by opening Command Prompt, typing the following command, and pressing Enter: wmic bios get serialnumber
+  </div>
+  </br>
+
   <div class="field">
-    <%= f.label :product %>
+    <%= f.label :product, "Product number" %>
     <%= f.text_field :product %>
   </div>
 
-  <div class="field">
-    <%= f.label :space %>
-    <%= f.number_field :space %>
+  <div>
+      On an HP computer, you can find the product number by pressing fn + esc.
   </div>
+  </br>
 
   <div class="field">
-    <%= f.label :processor %>
+    <%= f.label :space, "Hard drive storage (in GB)" %>
+    <%= f.text_field :space %>
+  </div>
+
+  <div>
+      Enter the total amount of hard drive space, not just free. You can find this by opening a new File Explorer window and selecting "This PC."
+  </div>
+  </br>
+
+  <h4> You can find the following pieces of information by right-clicking on "This PC" and clicking on "Properties." </h4>
+
+  <div class="field">
+    <%= f.label :processor, "Processor speed (in GHz)" %>
     <%= f.text_field :processor %>
   </div>
 
+  <div>
+      The first number after the @ sign
+  </div>
+  </br>
+
   <div class="field">
-    <%= f.label :ram %>
+    <%= f.label :ram, "RAM (in GB)" %>
     <%= f.text_field :ram %>
+  </div>
+
+  <div class="field">
+    <%= f.label :name, "Computer name" %>
+    <%= f.text_field :name %>
   </div>
 
   <div class="actions">

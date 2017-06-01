@@ -2,42 +2,7 @@
 
 <h1>Computers</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Status</th>
-      <th>Owner</th>
-      <th>Manufacturer</th>
-      <th>Model</th>
-      <th>Serial</th>
-      <th>Product</th>
-      <th>Space</th>
-      <th>Processor</th>
-      <th>Ram</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @computers.where(status: 1).each do |computer| %>
-      <tr>
-        <td><%= computer.name %></td>
-        <td><%= computer.status.humanize %></td>
-        <td><%= computer.owner %></td>
-        <td><%= computer.manufacturer %></td>
-        <td><%= computer.model %></td>
-        <td><%= computer.serial %></td>
-        <td><%= computer.product %></td>
-        <td><%= computer.space %></td>
-        <td><%= computer.processor %></td>
-        <td><%= computer.ram %></td>
-        <td><%= link_to 'Show', computer %></td>
-        <td><%= link_to 'Edit', edit_computer_path(computer) %></td>
-        <td><%= link_to 'Destroy', computer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
+<% @computers.select { |c| !c.history }.each do |computer| %>
+<h3> <%=link_to "#{computer.name} | #{computer.serial}", computer %> </h3>
+<%= render partial: 'root_computer', locals: {computer: computer} %>
+<% end %>

@@ -1,54 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @computer.name %>
-</p>
+<h2> <%= "#{@computer.name} | #{@computer.serial}" %> </h2>
+<%= render partial: 'root_computer', locals: {computer: @computer} %>
 
-<p>
-  <strong>Active:</strong>
-  <%= @computer.status.humanize %>
-</p>
+<% parent = @computer.parent %>
 
-<p>
-  <strong>Owner:</strong>
-  <%= @computer.owner %>
-</p>
-
-<p>
-  <strong>Manufacturer:</strong>
-  <%= @computer.manufacturer %>
-</p>
-
-<p>
-  <strong>Model:</strong>
-  <%= @computer.model %>
-</p>
-
-<p>
-  <strong>Serial:</strong>
-  <%= @computer.serial %>
-</p>
-
-<p>
-  <strong>Product:</strong>
-  <%= @computer.product %>
-</p>
-
-<p>
-  <strong>Space:</strong>
-  <%= @computer.space %>
-</p>
-
-<p>
-  <strong>Processor:</strong>
-  <%= @computer.processor %>
-</p>
-
-<p>
-  <strong>Ram:</strong>
-  <%= @computer.ram %>
-</p>
+<% while !parent.nil? do %>
+<%= render partial: 'history_computer', locals: {computer: parent} %>
+<% parent = parent.parent %>
+<% end %>
 
 <%= link_to 'Edit', edit_computer_path(@computer) %> |
 <%= link_to 'Back', computers_path %>
