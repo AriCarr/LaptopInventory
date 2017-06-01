@@ -1,10 +1,12 @@
 <nav class="navbar navbar-inverse">
 <div class="container">
   <div class="navbar-header">
-    <%= link_to 'FSE Equipment Inventory', root_path, class: 'navbar-brand' %>
+    <strong> <%= link_to 'FSENet Equipment Inventory', root_path, class: 'navbar-brand' %> </strong>
   </div>
   <div id="navbar">
     <ul class="nav navbar-nav pull-right">
+        <li><%= link_to "Computers", computers_path %></li>
+        <li><%= link_to 'New Computer', new_computer_path %></li>
     <% if current_user %>
         <li><%= link_to "Log Out #{current_user.name}...", logout_path, method: :delete %></li>
     <% else %>

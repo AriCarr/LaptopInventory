@@ -24,16 +24,21 @@ class ComputersController < ApplicationController
   # POST /computers
   # POST /computers.json
   def create
-    @computer = Computer.new(computer_params)
+    @computer = Computer.find_by(serial: params['computer']['serial'])
+    if @computer.nil?
+      @computer = Computer.new(computer_params)
 
-    respond_to do |format|
-      if @computer.save
-        format.html { redirect_to @computer, notice: 'Computer was successfully created.' }
-        format.json { render :show, status: :created, location: @computer }
-      else
-        format.html { render :new }
-        format.json { render json: @computer.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @computer.save
+          format.html { redirect_to @computer, notice: 'Computer was successfully created.' }
+          format.json { render :show, status: :created, location: @computer }
+        else
+          format.html { render :new }
+          format.json { render json: @computer.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      update
     end
   end
 
@@ -73,6 +78,6 @@ class ComputersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def computer_params
-      params.require(:computer).permit(:name, :active, :owner, :manufacturer, :model, :serial, :product, :space, :processor, :ram)
+      params.require(:computer).permit(:name, :active, :available, :owner, :manufacturer, :model, :serial, :product, :space, :processor, :ram)
     end
 end
