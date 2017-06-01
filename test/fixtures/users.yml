@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  provider: MyString
-  uid: MyString
-  name: MyString
+  provider: MyString1
+  uid: MyString1
+  name: MyString1
   can_edit: false
 
 two:

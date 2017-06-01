@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20170530175050) do
   create_table "computers", force: :cascade do |t|
     t.string   "name"
     t.boolean  "active"
+    t.boolean  "available"
     t.string   "owner"
     t.string   "manufacturer"
     t.string   "model"

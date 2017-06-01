@@ -3,6 +3,7 @@ class CreateComputers < ActiveRecord::Migration[5.0]
     create_table :computers do |t|
       t.string :name
       t.boolean :active
+      t.boolean :available
       t.string :owner
       t.string :manufacturer
       t.string :model
