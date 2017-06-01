@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   skip_before_filter :require_login
-  
+
   def create
     begin
       @user = User.from_omniauth(request.env['omniauth.auth'])
@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     rescue
       flash[:warning] = "There was an error while trying to authenticate you..."
     end
-  redirect_back_or user
+  redirect_back_or @user
   end
 
   def login_local
