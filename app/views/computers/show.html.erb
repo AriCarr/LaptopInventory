@@ -1,14 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<h2> <%= "#{@computer.name} | #{@computer.serial}" %> </h2>
+<h2> <%= "#{@computer.title} | " %>
+<%= link_to 'Edit', edit_computer_path(@computer) %> </h2>
 <%= render partial: 'root_computer', locals: {computer: @computer} %>
-
+<%= link_to 'Edit', edit_computer_path(@computer) %>
 <% parent = @computer.parent %>
 
 <% while !parent.nil? do %>
 <%= render partial: 'history_computer', locals: {computer: parent} %>
 <% parent = parent.parent %>
 <% end %>
-
-<%= link_to 'Edit', edit_computer_path(@computer) %> |
-<%= link_to 'Back', computers_path %>
