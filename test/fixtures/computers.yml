@@ -2,9 +2,10 @@
 
 one:
   name: MyString
-  active: false
+  history: false
+  status: 0
   owner: MyString
-  manufacturer: MyString
+  manufacturer: 0
   model: MyString
   serial: MyString
   product: MyString
@@ -14,11 +15,12 @@ one:
 
 two:
   name: MyString
-  active: false
+  history: false
+  status: 0
   owner: MyString
-  manufacturer: MyString
+  manufacturer: 0
   model: MyString
-  serial: MyString
+  serial: MyString1
   product: MyString
   space: 1
   processor: 1.5
