@@ -1,0 +1,117 @@
+<%= form_for(computer) do |f| %>
+  <% if computer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(computer.errors.count, "error") %> prohibited this computer from being saved:</h2>
+
+      <ul>
+      <% computer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :owner, "Your name:" %>
+    &nbsp
+    <%= f.text_field :owner %>
+    &nbsp&nbsp
+    <%= f.label :status, "Computer's current status:" %>
+    &nbsp
+    <%= f.select :status, options_for_select(@statuses.collect { |s| [s[0].humanize, s[0]] }, selected: @computer.status), {} %>
+  </div>
+
+  <div class="field">
+    <%= f.label :manufacturer, "Manufacturer:" %>
+    &nbsp
+    <%= f.select :manufacturer, options_for_select(@manufacturers.collect { |s| [s[0], s[0]] }, selected: @computer.manufacturer), {} %>
+    &nbsp&nbsp
+    <%= f.label :model, "Model:" %>
+    &nbsp
+    <%= f.text_field :model %>
+    &nbsp&nbsp
+    <%= f.label :serial, "Service tag/Serial number:" %>
+    &nbsp
+    <%= f.text_field :serial %>
+  </div>
+
+  <div>
+      You can find the serial number by opening Command Prompt, typing <code>wmic bios get serialnumber</code>, and pressing Enter.
+  </div>
+
+  </br>
+
+  <div class="field">
+    <%= f.label :wireless_mac, "Wireless MAC address:" %>
+    &nbsp
+    <%= f.text_field :wireless_mac %>
+    &nbsp&nbsp
+    <%= f.label :wired_mac, "Wired MAC address:" %>
+    &nbsp
+    <%= f.text_field :wired_mac %>
+  </div>
+
+  <div>
+      You can find these in Command Prompt by typing <code>ipconfig /all</code> and pressing Enter.
+  </br></br>
+      <strong>Wireless:</strong> Under "Wireless LAN adapter Wi-Fi", the twelve-character string labeled "Physical Address".
+  </br></br>
+      <strong>Wired</strong> <i>if your computer has an Ethernet port</i>: Under "Ethernet adapter Local Area Connection", the twelve-character string labeled "Physical Address".
+  </br></br>
+      <strong>Wired</strong> <i> if you use a USB -> Ethernet adapter</i>: Under "Ethernet Adapter Ethernet", the twelve-character string labeled "Physical Address".
+  </div>
+
+  </br>
+
+  <div class="field">
+    <%= f.label :product, "Product number:" %>
+    &nbsp
+    <%= f.text_field :product %>
+  </div>
+
+  <div>
+      On an HP computer, you can find the product number by pressing fn + esc.
+  </div>
+  </br>
+
+  <div class="field">
+    <%= f.label :space, "Hard drive storage (in GB):" %>
+    &nbsp
+    <%= f.text_field :space %>
+  </div>
+
+  <div>
+      Enter the total amount of hard drive space, not just free. You can find this by opening a new File Explorer window and selecting "This PC."
+  </div>
+  </br>
+
+  <h4> You can find the following pieces of information by right-clicking on "This PC" and clicking on "Properties." </h4>
+
+  <div class="field">
+    <%= f.label :processor, "Processor speed (in GHz):" %>
+    &nbsp
+    <%= f.text_field :processor %>
+    &nbsp&nbsp
+    <%= f.label :ram, "RAM (in GB):" %>
+    &nbsp
+    <%= f.text_field :ram %>
+    &nbsp&nbsp
+    <%= f.label :name, "Computer name:" %>
+    &nbsp
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+      Processor speed is the first number after the @ sign.
+  </div>
+  </br>
+
+  <div class="field">
+    <%= f.label :comments, "Additional comments:" %>
+    <%= f.text_field :comments, :size => 150 %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

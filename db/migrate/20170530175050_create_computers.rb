@@ -12,7 +12,7 @@ class CreateComputers < ActiveRecord::Migration[5.0]
       t.string :model
       t.string :serial
       t.string :product
-      t.integer :space
+      t.float :space
       t.float :processor
       t.float :ram
       t.integer :computer_id
