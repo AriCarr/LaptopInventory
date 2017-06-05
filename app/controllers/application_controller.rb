@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
   before_filter :require_login
-  before_action :store_location
+  before_action :store_location, :current_user
   protect_from_forgery with: :exception
 
   private
@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   def require_login
     if !current_user
-      flash[:warning] = 'Sorry, you must be logged in to view that page...'
+      flash[:warning] = "Sorry, please #{view_context.link_to 'LOG IN', '/auth/office365'} to view that page..."
       redirect_to root_path
     end
   end

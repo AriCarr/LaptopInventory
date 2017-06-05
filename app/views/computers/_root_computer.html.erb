@@ -1,2 +1,6 @@
-<h4> <%= "#{computer.possessive_name}" %> </h4>
-<h4> <%= "#{computer.specs}" %> </h4>
+<h4> <%= computer.possessive_name %> </h4>
+<h4> <%= computer.specs %> </h4>
+<h4> <%= computer.macs %> </h4>
+<% if computer.comments %>
+<h4><%= "Comments: \"#{computer.comments}\" -#{computer.comment_author}" %></h4>
+<% end %>

@@ -27,7 +27,7 @@ class ComputersController < ApplicationController
   def create
     @computer = Computer.find_by(serial: params['computer']['serial'])
     if @computer.nil?
-      @computer = Computer.new(computer_params)
+      @computer = Computer.new(fixed_params)
 
       respond_to do |format|
         if @computer.save
@@ -53,7 +53,7 @@ class ComputersController < ApplicationController
       @computer.parent = parent
     end
     respond_to do |format|
-      if @computer.update(computer_params)
+      if @computer.update(fixed_params)
         format.html { redirect_to @computer }
         format.json { render :show, status: :ok, location: @computer }
       else
@@ -61,6 +61,14 @@ class ComputersController < ApplicationController
         format.json { render json: @computer.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def fixed_params
+    my_params = computer_params
+    return my_params if @computer.nil?
+    my_params[:comments] = nil if @computer.comments == computer_params[:comments]
+    my_params[:comment_author] = current_user.name
+    my_params
   end
 
   # DELETE /computers/1
@@ -86,6 +94,6 @@ class ComputersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def computer_params
-      params.require(:computer).permit(:name, :status, :history, :owner, :manufacturer, :model, :serial, :product, :space, :processor, :ram)
+      params.require(:computer).permit(:name, :status, :history, :owner, :manufacturer, :model, :serial, :wired_mac, :wireless_mac, :product, :space, :processor, :ram, :comments, :comment_author)
     end
 end

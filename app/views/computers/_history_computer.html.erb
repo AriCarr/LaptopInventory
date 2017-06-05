@@ -1,4 +1,7 @@
 <hr>
 <h4> <%= "#{computer.name} | #{computer.date}" %> </h4>
-<h5> <%= "#{computer.possessive_name}" %> </h5>
-<h5> <%= "#{computer.specs}" %> </h5>
+<h5> <%= computer.possessive_name %> </h5>
+<h5> <%= computer.specs %> </h5>
+<% if computer.comments %>
+<h5><%= "Comments: \"#{computer.comments}\" -#{computer.comment_author}" %></h5>
+<% end %>
