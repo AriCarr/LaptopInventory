@@ -1,15 +1,13 @@
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#pc"><h3><strong>PC</strong></h3></a></li>
-  <li><a data-toggle="tab" href="#mac"><h3><strong>Mac</strong></h3></a></li>
+  <li class="active"><a data-toggle="tab" href="#pc"><h3><strong>&nbspNew PC&nbsp</strong></h3></a></li>
+  <li><a data-toggle="tab" href="#mac"><h3><strong>&nbspNew Mac&nbsp</strong></h3></a></li>
 </ul>
-
+</br>
 <div class="tab-content">
   <div id="pc" class="tab-pane fade in active">
-    <h3>New PC</h3>
     <%= render partial: 'pc_form', locals: {computer: @computer} %>
   </div>
   <div id="mac" class="tab-pane fade">
-    <h3>New Mac</h3>
     <%= render partial: 'mac_form', locals: {computer: @computer} %>
   </div>
 </div>

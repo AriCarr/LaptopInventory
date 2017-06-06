@@ -21,18 +21,18 @@
     <%= f.select :status, Computer.statuses.keys.to_a.map { |s| s.humanize } %>
     &nbsp&nbsp
 
-</br>
+</br></br>
 
 <h4> Go to the  menu and click on About This Mac. A window will pop up with several pieces of information. </h4>
   <div class "field">
-    <%= f.label :model, "Computer Model (eg. \"MacBook Pro (13-inch, Mid 2012)\" ):" %>
+    <%= f.label :model, "Computer model (eg. \"MacBook Pro (13-inch, Mid 2012)\" ):" %>
     &nbsp
     <%= f.text_field :model %>
     &nbsp&nbsp
     <%= f.label :serial, "Serial number:" %>
     &nbsp
     <%= f.text_field :serial %>
-</br>
+</br></br>
     <%= f.label :processor, "Processor (all we need is the number after the @ sign):" %>
     &nbsp
     <%= f.text_field :processor, :size=>"1" %> <strong>GHz</strong>
@@ -58,7 +58,7 @@
 <div class="field">
   <%= f.label :space, "Hard drive size:" %>
   &nbsp
-  <%= f.text_field :space %> <strong>GB</strong>
+  <%= f.text_field :space %> <strong>GB</strong> (1 TB = 1000 GB)
 </div>
 
 <h4> Open System Preferences and click on Network. Make sure you're connected to wifi and also to a wired connection.
