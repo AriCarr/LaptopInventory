@@ -23,8 +23,9 @@
     <%= f.label :manufacturer, "Manufacturer:" %>
     &nbsp
     <%= f.select :manufacturer, Computer.manufacturers.keys.to_a.from(1) %>
+    </div>
 
-</br></br>
+</br>
 
 <h4> Open Command Prompt, type <code>msinfo32</code>, and press Enter to get a system information window (you may have to scroll down). </h4>
   <div class "field">
@@ -61,7 +62,6 @@
  </br>
 
 <h4> Go back to Command Prompt and run <code>wmic bios get serialnumber</code> to get your computer's serial number. </h4>
-  </div>
 
   <div class="field">
     <%= f.label :serial, "Serial number:" %>

@@ -20,8 +20,9 @@
     &nbsp
     <%= f.select :status, Computer.statuses.keys.to_a.map { |s| s.humanize } %>
     &nbsp&nbsp
+    </div>
 
-</br></br>
+</br>
 
 <h4> Go to the  menu and click on About This Mac. A window will pop up with several pieces of information. </h4>
   <div class "field">
@@ -44,25 +45,21 @@
 
 </br>
 
-<h4> Open Terminal, run <code>sudo scutil --get ComputerName</code>, and enter your password to get your computer's name. </h4>
-  </div>
-  <%= f.label :name, "Computer name:" %>
-  &nbsp
-  <%= f.text_field :name %>
+<h4> Open Terminal and run <code>sudo scutil --get ComputerName; diskutil info / | grep "Disk Size"</code>.</br>You'll be prompted for your password. Enter it to get your computer's name and hard drive size. </h4>
+
   <div class="field">
-
+      <%= f.label :name, "Computer name:" %>
+      &nbsp
+      <%= f.text_field :name %>
+      &nbsp&nbsp
+      <%= f.label :space, "Hard drive size:" %>
+      &nbsp
+      <%= f.text_field :space %> <strong>GB</strong> (1 TB = 1000 GB)
   </div>
+  </br>
 
-<h4> In Terminal, run <code>diskutil info / | grep "Disk Size"</code> to get your hard drive's size. </h4>
-
-<div class="field">
-  <%= f.label :space, "Hard drive size:" %>
-  &nbsp
-  <%= f.text_field :space %> <strong>GB</strong> (1 TB = 1000 GB)
-</div>
-
-<h4> Open System Preferences and click on Network. Make sure you're connected to wifi and also to a wired connection.
-</br>For both of the two connection types on the left sidebar that say "Connected", follow these steps: </h4>
+<h4> Open System Preferences and click on Network. Make sure you're connected to wifi and also to a wired connection.</h4>
+<h4>For both of the two connection types on the left sidebar that say "Connected", follow these steps: </h4>
 <strong><ol>
   <li>Click on the connection type in the left sidebar of the window</li>
   <li>Click on Advanced... in the lower right corner</li>
