@@ -1,0 +1,91 @@
+<%= form_for(computer) do |f| %>
+  <% if computer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(computer.errors.count, "error") %> prohibited this computer from being saved:</h2>
+
+      <ul>
+      <% computer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :owner, "Your name:" %>
+    &nbsp
+    <%= f.text_field :owner %>
+    &nbsp&nbsp
+    <%= f.label :status, "Computer's current status:" %>
+    &nbsp
+    <%= f.select :status, Computer.statuses.keys.to_a.map { |s| s.humanize } %>
+    &nbsp&nbsp
+
+</br>
+
+<h4> Go to the  menu and click on About This Mac. A window will pop up with several pieces of information. </h4>
+  <div class "field">
+    <%= f.label :model, "Computer Model (eg. \"MacBook Pro (13-inch, Mid 2012)\" ):" %>
+    &nbsp
+    <%= f.text_field :model %>
+    &nbsp&nbsp
+    <%= f.label :serial, "Serial number:" %>
+    &nbsp
+    <%= f.text_field :serial %>
+</br>
+    <%= f.label :processor, "Processor (all we need is the number after the @ sign):" %>
+    &nbsp
+    <%= f.text_field :processor, :size=>"1" %> <strong>GHz</strong>
+    &nbsp&nbsp
+    <%= f.label :ram, "Memory:" %>
+    &nbsp
+    <%= f.text_field :ram, :size=>"1" %> <strong>GB</strong>
+  </div>
+
+</br>
+
+<h4> Open Terminal, run <code>sudo scutil --get ComputerName</code>, and enter your password to get your computer's name. </h4>
+  </div>
+  <%= f.label :name, "Computer name:" %>
+  &nbsp
+  <%= f.text_field :name %>
+  <div class="field">
+
+  </div>
+
+<h4> In Terminal, run <code>diskutil info / | grep "Disk Size"</code> to get your hard drive's size. </h4>
+
+<div class="field">
+  <%= f.label :space, "Hard drive size:" %>
+  &nbsp
+  <%= f.text_field :space %> <strong>GB</strong>
+</div>
+
+<h4> Open System Preferences and click on Network. Make sure you're connected to wifi and also to a wired connection.
+</br>For both of the two connection types on the left sidebar that say "Connected", follow these steps: </h4>
+<strong><ol>
+  <li>Click on the connection type in the left sidebar of the window</li>
+  <li>Click on Advanced... in the lower right corner</li>
+  <li>Click on Hardware</li>
+  <li>Enter the MAC address into the field on this page</li>
+</ol></strong>
+
+  <div class="field">
+    <%= f.label :wireless_mac, "Wi-Fi MAC address:" %>
+    &nbsp
+    <%= f.text_field :wireless_mac %>
+    &nbsp&nbsp
+    <%= f.label :wired_mac, "Wired MAC address (either Ethernet or an adapter):" %>
+    <%= f.text_field :wired_mac %>
+  </div>
+
+  <div class="field">
+    <%= f.label :comments, "<h4>Any additional comments:</h4>".html_safe %>
+    &nbsp
+    <%= f.text_field :comments, :size => 140 %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

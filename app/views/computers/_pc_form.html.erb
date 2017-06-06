@@ -18,16 +18,15 @@
     &nbsp&nbsp
     <%= f.label :status, "Computer's current status:" %>
     &nbsp
-    <%= f.select :status, options_for_select(@statuses.collect { |s| [s[0].humanize, s[0]] }, selected: @computer.status), {} %>
+    <%= f.select :status, Computer.statuses.keys.to_a.map { |s| s.humanize } %>
     &nbsp&nbsp
     <%= f.label :manufacturer, "Manufacturer:" %>
     &nbsp
-    <%= f.select :manufacturer, options_for_select(@manufacturers.collect { |s| [s[0], s[0]] }, selected: @computer.manufacturer), {} %>
+    <%= f.select :manufacturer, Computer.manufacturers.keys.to_a.from(1) %>
 
-</br></br>
+</br>
 
-<h4> Open Command Prompt, type <code>msinfo32</code>, and press Enter. </h4>
-<h4> A window will pop up with several pieces of information (you may have to scroll down). </h4>
+<h4> Open Command Prompt, type <code>msinfo32</code>, and press Enter to get a system information window (you may have to scroll down). </h4>
   <div class "field">
     <%= f.label :name, "System Name:" %>
     &nbsp
@@ -41,7 +40,7 @@
     &nbsp
     <%= f.text_field :product %>
     &nbsp&nbsp
-</br></br>
+</br>
     <%= f.label :processor, "Processor (all we need is the number after the @ sign):" %>
     &nbsp
     <%= f.text_field :processor, :size=>"1" %> <strong>GHz</strong>
@@ -51,14 +50,12 @@
     <%= f.text_field :ram, :size=>"1" %> <strong>GB</strong>
   </div>
 
-</br>
-
 <h4> Click the + next to "Components", then click on the + next to "Storage", then click on "Drives." </h4>
 
   <div class="field">
     <%= f.label :space, "Size (under drive C):" %>
     &nbsp
-    <%= f.text_field :space %> <strong>GB</strong>
+    <%= f.text_field :space %> <strong>GB</strong> (1 TB = 1000 GB)
   </div>
 
  </br>
@@ -72,7 +69,6 @@
     <%= f.text_field :serial %>
   </div>
 
-  </br>
 
 <h4> Last Command Prompt thing, I promise! Run <code>ipconfig /all</code>, then follow the instructions below to find the information you need. </h4>
 
@@ -84,10 +80,9 @@
 
   <div class="field">
       <%= f.label :wired_mac, "<i>If your computer has an Ethernet port</i>: Under \"Ethernet adapter Local Area Connection\", the twelve-character string labeled \"Physical Address\".</br><i> Or, if you use a USB -> Ethernet adapter</i>: Under \"Ethernet Adapter Ethernet\", the twelve-character string labeled \"Physical Address\".".html_safe %>
+  </br>
       <%= f.text_field :wired_mac %>
   </div>
-
-  </br>
 
   <div class="field">
     <%= f.label :comments, "<h4>Any additional comments:</h4>".html_safe %>

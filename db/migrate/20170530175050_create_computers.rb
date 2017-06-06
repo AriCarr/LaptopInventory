@@ -3,12 +3,9 @@ class CreateComputers < ActiveRecord::Migration[5.0]
     create_table :computers do |t|
       t.string :name
       t.integer :status, default: 0
-        # 1 = in use
-        # 2 = available
-        # 3 = destroyed
       t.boolean :history, default: false
       t.string :owner
-      t.integer :manufacturer
+      t.integer :manufacturer, default: 0
       t.string :model
       t.string :serial
       t.string :product

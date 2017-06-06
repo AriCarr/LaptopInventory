@@ -1,6 +1,5 @@
 class ComputersController < ApplicationController
   before_action :set_computer, only: [:show, :edit, :update, :destroy]
-  before_action :gather_enums
 
   # GET /computers
   # GET /computers.json
@@ -85,11 +84,6 @@ class ComputersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_computer
       @computer = Computer.find(params[:id])
-    end
-
-    def gather_enums
-      @statuses = Computer.statuses
-      @manufacturers = Computer.manufacturers
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
