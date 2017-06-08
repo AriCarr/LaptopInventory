@@ -17,7 +17,7 @@ class Computer < ApplicationRecord
   end
 
   def possessive_name
-    "#{owner}'s #{manufacturer} #{model} (#{status.humanize})"
+    "#{owner}'s #{"#{manufacturer} " unless model.include? manufacturer}#{model} (#{status.humanize})"
   end
 
   def specs

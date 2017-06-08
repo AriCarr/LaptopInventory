@@ -4,7 +4,7 @@ class ComputersController < ApplicationController
   # GET /computers
   # GET /computers.json
   def index
-    @computers = Computer.all
+    @computers = Computer.all.sort_by(&:possessive_name)
   end
 
   # GET /computers/1
