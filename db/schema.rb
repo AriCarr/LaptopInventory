@@ -20,11 +20,11 @@ ActiveRecord::Schema.define(version: 20170530175050) do
     t.integer  "status",         default: 0
     t.boolean  "history",        default: false
     t.string   "owner"
-    t.integer  "manufacturer"
+    t.integer  "manufacturer",   default: 0
     t.string   "model"
     t.string   "serial"
     t.string   "product"
-    t.integer  "space"
+    t.float    "space"
     t.float    "processor"
     t.float    "ram"
     t.integer  "computer_id"

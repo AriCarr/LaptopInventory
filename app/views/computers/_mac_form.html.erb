@@ -18,7 +18,7 @@
     &nbsp&nbsp
     <%= f.label :status, "Computer's current status:" %>
     &nbsp
-    <%= f.select :status, Computer.statuses.keys.to_a.map { |s| s.humanize } %>
+    <%= f.select :status, options_for_select(Computer.statuses.collect { |s| [s[0].humanize, s[0]] }, selected: @computer.status), {} %>
     &nbsp&nbsp
     </div>
 
@@ -28,7 +28,7 @@
   <div class "field">
     <%= f.label :model, "Computer model (eg. \"MacBook Pro (13-inch, Mid 2012)\" ):" %>
     &nbsp
-    <%= f.text_field :model %>
+    <%= f.text_field :model, :size=>"40" %>
     &nbsp&nbsp
     <%= f.label :serial, "Serial number:" %>
     &nbsp
@@ -54,7 +54,7 @@
       &nbsp&nbsp
       <%= f.label :space, "Hard drive size:" %>
       &nbsp
-      <%= f.text_field :space %> <strong>GB</strong> (1 TB = 1000 GB)
+      <%= f.text_field :space, :size=>"2" %> <strong>GB</strong> (1 TB = 1000 GB)
   </div>
   </br>
 
@@ -80,6 +80,8 @@
     <%= f.label :comments, "<h4>Any additional comments:</h4>".html_safe %>
     &nbsp
     <%= f.text_field :comments, :size => 140 %>
+    <!-- <%= f.select :manufacturer, Computer.manufacturers.keys.to_a %> -->
+    <%= f.hidden_field :manufacturer, :value => :Apple %>
   </div>
 
   <div class="actions">

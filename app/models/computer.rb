@@ -9,7 +9,7 @@ class Computer < ApplicationRecord
   enum manufacturer: [ :"Apple", :"Dell", :"HP", :"Lenovo", :"Microsoft", :"Other" ]
 
   def title
-    "#{name} | S/N: #{serial}"
+    "#{name} | S/N: #{serial} #{" | P/N: #{product}" if !product.nil?}"
   end
 
   def date

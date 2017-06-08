@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
-  before_filter :require_login
-  before_action :store_location, :current_user
+  before_action :store_location, :current_user, :require_login
+  skip_before_action :require_login, only: [:new, :create]
   protect_from_forgery with: :exception
 
   private

@@ -24,7 +24,7 @@ class ComputersController < ApplicationController
   # POST /computers
   # POST /computers.json
   def create
-    @computer = Computer.find_by(serial: params['computer']['serial'])
+    @computer = Computer.where(serial: params['computer']['serial'], manufacturer: params['computer']['manufacturer']).sort_by(&:updated_at).last
     if @computer.nil?
       @computer = Computer.new(fixed_params)
 
@@ -38,6 +38,8 @@ class ComputersController < ApplicationController
         end
       end
     else
+      @computer.history = false
+      @computer.save!
       update
     end
   end
@@ -45,12 +47,7 @@ class ComputersController < ApplicationController
   # PATCH/PUT /computers/1
   # PATCH/PUT /computers/1.json
   def update
-    if @computer.history != true
-      parent = @computer.dup
-      parent.history = true
-      parent.save!
-      @computer.parent = parent
-    end
+    set_parent if @computer.history != true
     respond_to do |format|
       if @computer.update(fixed_params)
         format.html { redirect_to @computer }
@@ -62,11 +59,18 @@ class ComputersController < ApplicationController
     end
   end
 
+  def set_parent
+    parent = @computer.dup
+    parent.history = true
+    # parent.save!
+    @computer.parent = parent
+  end
+
   def fixed_params
+    # byebug
     my_params = computer_params
-    return my_params if @computer.nil?
-    my_params[:comments] = nil if @computer.comments == computer_params[:comments]
-    my_params[:comment_author] = current_user.name
+    my_params[:comment_author] = @current_user.name
+    my_params[:comments] = nil if (!@computer.nil? && @computer.comments == computer_params[:comments]) || computer_params[:comments] == ""
     my_params
   end
 
