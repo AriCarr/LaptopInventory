@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <h4><div class="field">
     <%= f.label :owner, "Your name:" %>
     &nbsp
     <%= f.text_field :owner %>
@@ -20,11 +20,14 @@
     &nbsp
     <%= f.select :status, options_for_select(Computer.statuses.collect { |s| [s[0].humanize, s[0]] }, selected: @computer.status), {} %>
     &nbsp&nbsp
-    </div>
+</div></h4>
 
 </br>
 
-<h4> Go to the  menu and click on About This Mac. A window will pop up with several pieces of information. </h4>
+<% list_init %>
+
+<h4> <%=list%> Click on the Apple logo in the upper right corner of the screen, and click on About This Mac.</h4>
+<h4>A window will pop up with several pieces of information. </h4>
   <div class "field">
     <%= f.label :model, "Computer model (eg. \"MacBook Pro (13-inch, Mid 2012)\" ):" %>
     &nbsp
@@ -33,8 +36,8 @@
     <%= f.label :serial, "Serial number:" %>
     &nbsp
     <%= f.text_field :serial %>
-</br></br>
-    <%= f.label :processor, "Processor (all we need is the number after the @ sign):" %>
+</br>
+    <%= f.label :processor, "Processor speed:" %>
     &nbsp
     <%= f.text_field :processor, :size=>"1" %> <strong>GHz</strong>
     &nbsp&nbsp
@@ -43,22 +46,30 @@
     <%= f.text_field :ram, :size=>"1" %> <strong>GB</strong>
   </div>
 
-</br>
-
-<h4> Open Terminal and run <code>sudo scutil --get ComputerName; diskutil info / | grep "Disk Size"</code>.</br>You'll be prompted for your password. Enter it to get your computer's name and hard drive size. </h4>
+<hr>
+<h4> <%=list%> At the top of the About This Mac window, click on Storage.</h4>
 
   <div class="field">
-      <%= f.label :name, "Computer name:" %>
-      &nbsp
-      <%= f.text_field :name %>
-      &nbsp&nbsp
-      <%= f.label :space, "Hard drive size:" %>
+      <%= f.label :space, "Total hard drive size (the number in the lower left corner):" %>
       &nbsp
       <%= f.text_field :space, :size=>"2" %> <strong>GB</strong> (1 TB = 1000 GB)
   </div>
-  </br>
 
-<h4> Open System Preferences and click on Network. Make sure you're connected to wifi and also to a wired connection.</h4>
+<hr>
+
+<h4> <%=list%> Click on the Apple logo again, click on System Preferences..., and then click on Sharing. </h4>
+
+  <div class="field">
+      <%= f.label :name, "Computer Name:" %>
+      &nbsp
+      <%= f.text_field :name %>
+      &nbsp&nbsp
+  </div>
+
+  <hr>
+
+<h4> <%=list%> Click on the < button in the upper left corner of the window, then click on Network.</h4>
+<h4>Make sure you're connected to both wifi and a wired connection.</h4>
 <h4>For both of the two connection types on the left sidebar that say "Connected", follow these steps: </h4>
 <strong><ol>
   <li>Click on the connection type in the left sidebar of the window</li>
@@ -76,14 +87,16 @@
     <%= f.text_field :wired_mac %>
   </div>
 
+  <hr>
+
   <div class="field">
-    <%= f.label :comments, "<h4>Any additional comments:</h4>".html_safe %>
+    <%= f.label :comments, "<h4>#{list} Any additional comments:</h4>".html_safe %>
     &nbsp
     <%= f.text_field :comments, :size => 140 %>
     <%= f.hidden_field :manufacturer, :value => :Apple %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Submit" %>
   </div>
 <% end %>

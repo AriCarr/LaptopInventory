@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <h4><div class="field">
     <%= f.label :owner, "Your name:" %>
     &nbsp
     <%= f.text_field :owner %>
@@ -23,11 +23,12 @@
     <%= f.label :manufacturer, "Manufacturer:" %>
     &nbsp
     <%= f.select :manufacturer, Computer.manufacturers.keys.to_a.from(1) %>
-    </div>
+</div></h4>
 
-</br>
+<hr>
 
-<h4> Open Command Prompt, type <code>msinfo32</code>, and press Enter to get a system information window (you may have to scroll down). </h4>
+<h4> <%=list%> Hold down the Windows logo key and press R, then type <code>cmd</code> into the window that appears and press Enter to open Command Prompt.</h4>
+<h4>In Command Prompt, type <code>msinfo32</code> and press Enter to get a system information window. </h4>
   <div class "field">
     <%= f.label :name, "System Name:" %>
     &nbsp
@@ -41,7 +42,7 @@
     &nbsp
     <%= f.text_field :product %>
     &nbsp&nbsp
-</br></br>
+</br>
     <%= f.label :processor, "Processor (all we need is the number after the @ sign):" %>
     &nbsp
     <%= f.text_field :processor, :size=>"1" %> <strong>GHz</strong>
@@ -51,7 +52,9 @@
     <%= f.text_field :ram, :size=>"1" %> <strong>GB</strong>
   </div>
 
-<h4> Click the + next to "Components", then click on the + next to "Storage", then click on "Drives." </h4>
+<hr>
+
+<h4> <%=list%> Click the + next to "Components", then click on the + next to "Storage", then click on "Drives." </h4>
 
   <div class="field">
     <%= f.label :space, "Size (under drive C):" %>
@@ -59,9 +62,9 @@
     <%= f.text_field :space, :size=>"2" %> <strong>GB</strong> (1 TB = 1000 GB)
   </div>
 
- </br>
+ <hr>
 
-<h4> Go back to Command Prompt and run <code>wmic bios get serialnumber</code> to get your computer's serial number. </h4>
+<h4> <%=list%> Go back to Command Prompt and run <code>wmic bios get serialnumber</code> to get your computer's serial number. </h4>
 
   <div class="field">
     <%= f.label :serial, "Serial number:" %>
@@ -69,8 +72,9 @@
     <%= f.text_field :serial %>
   </div>
 
+  <hr>
 
-<h4> Finally in Command Prompt, run <code>ipconfig /all</code>, then follow the instructions below to find the information you need. </h4>
+<h4> <%=list%> Finally in Command Prompt, run <code>ipconfig /all</code>, then follow the instructions below to find the information you need. </h4>
 
   <div class="field">
     <%= f.label :wireless_mac, "Under \"Wireless LAN adapter Wi-Fi\" or \"Wireless LAN adapter Wireless Network Connection\", the twelve-character string labeled \"Physical Address\":" %>
@@ -84,13 +88,15 @@
       <%= f.text_field :wired_mac %>
   </div>
 
+  <hr>
+
   <div class="field">
-    <%= f.label :comments, "<h4>Any additional comments:</h4>".html_safe %>
+    <%= f.label :comments, "<h4>#{list} Any additional comments:</h4>".html_safe %>
     &nbsp
     <%= f.text_field :comments, :size => 140 %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Submit" %>
   </div>
 <% end %>

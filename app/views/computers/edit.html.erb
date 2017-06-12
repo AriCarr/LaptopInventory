@@ -1,9 +1,5 @@
 <h3>Editing <%= @computer.possessive_name %></h3>
 
-<% if @computer.Apple? %>
-<%= render partial: 'mac_form', locals: {computer: @computer} %>
-<% else %>
-<%= render partial: 'pc_form', locals: {computer: @computer} %>
-<% end %>
+<%= render partial: "#{@computer.Apple? ? 'mac' : 'pc'}_form", locals: {computer: @computer} %>
 
 <%= link_to 'Back', computers_path %>

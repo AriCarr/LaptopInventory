@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
-  skip_before_filter :require_login
-  skip_before_action :store_location
+  # skip_before_filter :require_login
+  skip_before_action :store_location, :require_login
 
   def create
     begin
