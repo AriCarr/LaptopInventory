@@ -11,8 +11,8 @@ class ApplicationController < ActionController::Base
 
   def require_login
     if !current_user
-      flash[:warning] = "Sorry, please #{view_context.link_to 'LOG IN', '/auth/office365'} to view that page..."
-      redirect_to root_path
+      store_location
+      redirect_to '/auth/office365'
     end
   end
 
