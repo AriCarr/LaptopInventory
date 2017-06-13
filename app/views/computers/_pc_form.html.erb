@@ -27,65 +27,82 @@
 
 <hr>
 
-<h4> <%=list%> Hold down the Windows logo key and press R, then type <code>cmd</code> into the window that appears and press Enter to open Command Prompt.</h4>
-<h4>In Command Prompt, type <code>msinfo32</code> and press Enter to get a system information window. </h4>
-  <div class "field">
-    <%= f.label :name, "System Name:" %>
-    &nbsp
-    <%= f.text_field :name %>
-    &nbsp&nbsp
-    <%= f.label :model, "System Model:" %>
-    &nbsp
-    <%= f.text_field :model %>
-    &nbsp&nbsp
-    <%= f.label :product, "System SKU:" %>
-    &nbsp
-    <%= f.text_field :product %>
-    &nbsp&nbsp
-</br>
-    <%= f.label :processor, "Processor (all we need is the number after the @ sign):" %>
-    &nbsp
-    <%= f.text_field :processor, :size=>"1" %> <strong>GHz</strong>
-    &nbsp&nbsp
-    <%= f.label :ram, "Installed Physical Memory (RAM):" %>
-    &nbsp
-    <%= f.text_field :ram, :size=>"1" %> <strong>GB</strong>
-  </div>
+<h4> Click <u><%= link_to 'here', sysinfo_path, download: '' %></u> to download a tool that will list lots of information about your computer. </h4>
+<h4> Make sure you have <i>both a wireless and wired network connection</i>, then open the file and click Run.</h4>
+<h4> Close the square window with the detailed information about your processor.</h4>
+<h4> You should see a large rectangular window. Follow these instructions to get the information we need:</h4>
 
 <hr>
 
-<h4> <%=list%> Click the + next to "Components", then click on the + next to "Storage", then click on "Drives." </h4>
+<h4> <%=list%> That window should display some general information about your computer.</h4>
+  <div class "field">
+    <%= f.label :name, "Computer Name:" %>
+    &nbsp
+    <%= f.text_field :name %>
+</div>
 
-  <div class="field">
-    <%= f.label :space, "Size (under drive C):" %>
+<hr>
+
+<h4> <%=list%> Click on the + next to Central Processor(s), then on the name of your computer's processor. </h4>
+
+<div class "field">
+    <%= f.label :processor, "The number after the @ sign in \"CPU Brand Name\":" %>
+    &nbsp
+    <%= f.text_field :processor, :size=>"1" %> <strong>GHz</strong>
+</div>
+
+<hr>
+
+<h4> <%=list%> Click on the + next to Motherboard, then on the + next to SMBIOS DMI, then on System. </h4>
+
+<div class "field">
+    <%= f.label :model, "Product Name:" %>
+    &nbsp
+    <%= f.text_field :model %>
+    &nbsp&nbsp
+    <%= f.label :serial, "Product Serial Number:" %>
+    &nbsp
+    <%= f.text_field :serial %>
+    &nbsp&nbsp
+    <%= f.label :product, "SKU Number:" %>
+    &nbsp
+    <%= f.text_field :product %>
+</div>
+
+<hr>
+
+<h4> <%=list%> Click on Memory. </h4>
+
+<div class "field">
+    <%= f.label :ram, "Total Memory Size:" %>
+    &nbsp
+    <%= f.text_field :ram, :size=>"1" %> <strong>GB</strong>
+</div>
+
+<hr>
+
+<h4> <%=list%> Click on the + next to Drives, then on the + next to (S)ATA/ATAPI Drives, then on the name of your hard drive. </h4>
+
+<div class="field">
+    <%= f.label :space, "Drive Capacity (in GB):" %>
     &nbsp
     <%= f.text_field :space, :size=>"2" %> <strong>GB</strong> (1 TB = 1000 GB)
-  </div>
+</div>
 
  <hr>
 
-<h4> <%=list%> Go back to Command Prompt and run <code>wmic bios get serialnumber</code> to get your computer's serial number. </h4>
+<h4> <%=list%> Finally, click on the + next to Network to see your computer's network hardware. </h4>
+<h4> You should see two entries, one for your wireless connection and one for wired. </h4>
+<h4> Click on each of them to get specific information about them. </h4>
 
   <div class="field">
-    <%= f.label :serial, "Serial number:" %>
-    &nbsp
-    <%= f.text_field :serial %>
-  </div>
-
-  <hr>
-
-<h4> <%=list%> Finally in Command Prompt, run <code>ipconfig /all</code>, then follow the instructions below to find the information you need. </h4>
-
-  <div class="field">
-    <%= f.label :wireless_mac, "Under \"Wireless LAN adapter Wi-Fi\" or \"Wireless LAN adapter Wireless Network Connection\", the twelve-character string labeled \"Physical Address\":" %>
+    <%= f.label :wireless_mac, "Wireless MAC Address:" %>
     &nbsp
     <%= f.text_field :wireless_mac %>
-  </div>
-
-  <div class="field">
-      <%= f.label :wired_mac, "<i>If your computer has an Ethernet port</i>: Under \"Ethernet adapter Local Area Connection\", the twelve-character string labeled \"Physical Address\".</br><i> Or, if you use a USB → Ethernet adapter</i>: Under \"Ethernet Adapter Ethernet\", the twelve-character string labeled \"Physical Address\".".html_safe %>
-  </br>
-      <%= f.text_field :wired_mac %>
+    &nbsp&nbsp
+    <%= f.label :wired_mac, "Wired MAC Address:"%>
+    &nbsp
+    <%= f.text_field :wired_mac %>
   </div>
 
   <hr>

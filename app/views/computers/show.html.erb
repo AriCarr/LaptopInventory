@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h2> <%= "#{@computer.title} | " %>
-<%= link_to 'Edit', edit_computer_path(@computer) %> </h2>
+<u><%= link_to 'Edit', edit_computer_path(@computer) %></u> </h2>
 <%= render partial: 'root_computer', locals: {computer: @computer} %>
 <% parent = @computer.parent %>
 
