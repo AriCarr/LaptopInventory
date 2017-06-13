@@ -1,5 +1,7 @@
 <h3>Editing <%= @computer.possessive_name %></h3>
 
+<% list_init %>
+
 <%= render partial: "#{@computer.Apple? ? 'mac' : 'pc'}_form", locals: {computer: @computer} %>
 
 <%= link_to 'Back', computers_path %>
