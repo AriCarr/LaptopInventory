@@ -35,9 +35,8 @@ graph = MicrosoftGraph.new(
 
 count = 0
 total = graph.users.count
+blacklist = ENV['EMAIL_BLACKLIST'].split('|').map{ |s| "#{s}@fsenet.com"}
 
 graph.users.each do |u|
-  User.find_or_create_by(name: u.display_name, email: u.mail)
-    # byebug if u.display_name == "Mailerl FSE"
-  puts "#{count += 1}/#{total} done."
+  User.find_or_create_by(name: u.display_name, email: u.mail) unless blacklist.include?(u.mail)
 end

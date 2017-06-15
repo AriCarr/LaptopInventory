@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :computers
+  validates :email, presence: true, format: { with: /\b[A-Z0-9._%a-z\-]+@fsenet\.com\z/}
 
   class << self
     def from_omniauth(auth_hash)
