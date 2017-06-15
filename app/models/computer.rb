@@ -1,7 +1,11 @@
 class Computer < ApplicationRecord
   belongs_to :computer, optional: true
   alias_attribute :parent, :computer
-  validates :owner, :serial, presence: true, allow_blank: false
+
+  belongs_to :user
+  alias_attribute :owner, :user
+
+  validates :serial, presence: true, allow_blank: false
   validates :ram, :processor, :space, numericality: true
   validates :wired_mac, :wireless_mac, mac_address: true
 
@@ -17,7 +21,7 @@ class Computer < ApplicationRecord
   end
 
   def possessive_name
-    "#{owner}'s #{"#{manufacturer} " unless model.include? manufacturer}#{model} (#{status.humanize})"
+    "#{owner.name}'s #{"#{manufacturer} " unless model.include? manufacturer}#{model} (#{status.humanize})"
   end
 
   def specs

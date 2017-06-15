@@ -1,12 +1,9 @@
 class User < ApplicationRecord
+  has_many :computers
 
   class << self
     def from_omniauth(auth_hash)
-      user = find_or_create_by(uid: auth_hash['uid'], provider: auth_hash['provider'])
-      user.name = auth_hash['info']['name']
-      user.email = auth_hash['extra']['raw_info']['mail']
-      user.save!
-      user
+      find_or_create_by(name: auth_hash['info']['name'], email: auth_hash['extra']['raw_info']['mail'])
     end
   end
 

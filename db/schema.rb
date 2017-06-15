@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20170530175050) do
     t.string   "name"
     t.integer  "status",         default: 0
     t.boolean  "history",        default: false
-    t.string   "owner"
     t.integer  "manufacturer",   default: 0
     t.string   "model"
     t.string   "serial"
@@ -28,6 +27,7 @@ ActiveRecord::Schema.define(version: 20170530175050) do
     t.float    "processor"
     t.float    "ram"
     t.integer  "computer_id"
+    t.integer  "user_id"
     t.text     "comments"
     t.string   "comment_author"
     t.string   "wired_mac"
@@ -37,16 +37,14 @@ ActiveRecord::Schema.define(version: 20170530175050) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "provider",                   null: false
-    t.string   "uid",                        null: false
     t.string   "name"
     t.string   "email"
     t.boolean  "can_edit",   default: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
-    t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true, using: :btree
-    t.index ["provider"], name: "index_users_on_provider", using: :btree
-    t.index ["uid"], name: "index_users_on_uid", using: :btree
+    t.index ["email"], name: "index_users_on_email", using: :btree
+    t.index ["name", "email"], name: "index_users_on_name_and_email", unique: true, using: :btree
+    t.index ["name"], name: "index_users_on_name", using: :btree
   end
 
 end

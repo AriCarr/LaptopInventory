@@ -5,3 +5,39 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# require 'adal'
+# require 'microsoft_graph'
+# require 'byebug'
+
+# authenticate using ADAL
+username      = ENV['AUTH_EMAIL']
+password      = ENV['AUTH_PWD']
+client_id     = ENV['OFFICE365_KEY']
+client_secret = ENV['OFFICE365_SECRET']
+# client_secret = '3qRYnHugmwAdJ24RChGbwkt'
+tenant        = 'fsenet.onmicrosoft.com'
+user_cred     = ADAL::UserCredential.new(username, password)
+client_cred   = ADAL::ClientCredential.new(client_id, client_secret)
+context       = ADAL::AuthenticationContext.new(ADAL::Authority::WORLD_WIDE_AUTHORITY, tenant)
+resource      = "https://graph.microsoft.com"
+tokens        = context.acquire_token_for_user(resource, client_cred, user_cred)
+
+# add the access token to the request header
+callback = Proc.new { |r| r.headers["Authorization"] = "Bearer #{tokens.access_token}" }
+
+graph = MicrosoftGraph.new(
+                            base_url: "https://graph.microsoft.com/v1.0",
+                            cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, "metadata_v1.0.xml"),
+                            &callback
+)
+# byebug
+
+count = 0
+total = graph.users.count
+
+graph.users.each do |u|
+  User.find_or_create_by(name: u.display_name, email: u.mail)
+    # byebug if u.display_name == "Mailerl FSE"
+  puts "#{count += 1}/#{total} done."
+end

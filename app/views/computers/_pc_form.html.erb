@@ -12,9 +12,9 @@
   <% end %>
 
   <h4><div class="field">
-    <%= f.label :owner, "Your name:" %>
+    <%= f.label :owner, "Computer's owner:" %>
     &nbsp
-    <%= f.text_field :owner %>
+    <%= f.collection_select :user_id, User.order(:name), :id, :name, selected: current_user.id %>
     &nbsp&nbsp
     <%= f.label :status, "Computer's current status:" %>
     &nbsp
@@ -31,6 +31,7 @@
 <h4> Make sure you have <i>both a wireless and wired network connection</i>, then open the file and click Run.</h4>
 <h4> Close the square window with the detailed information about your processor.</h4>
 <h4> You should see a large rectangular window. Follow these instructions to get the information we need:</h4>
+<h5> (You can right-click on the desired line and click on "Copy Result", and then paste it into the appropriate field.) </h5>
 
 <hr>
 

@@ -92,6 +92,6 @@ class ComputersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def computer_params
-      params.require(:computer).permit(:name, :status, :history, :owner, :manufacturer, :model, :serial, :wired_mac, :wireless_mac, :product, :space, :processor, :ram, :comments, :comment_author)
+      params.require(:computer).permit(:name, :status, :history, :user_id, :manufacturer, :model, :serial, :wired_mac, :wireless_mac, :product, :space, :processor, :ram, :comments, :comment_author)
     end
 end

@@ -5,6 +5,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'adal'
+gem 'microsoft_graph'
+gem 'filterrific'
 gem 'missing_validators'
 gem 'omniauth-oauth2', '1.3.1'
 gem 'omniauth-office365'
