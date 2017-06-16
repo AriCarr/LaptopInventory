@@ -31,12 +31,13 @@ graph = MicrosoftGraph.new(
                             cached_metadata_file: File.join(MicrosoftGraph::CACHED_METADATA_DIRECTORY, "metadata_v1.0.xml"),
                             &callback
 )
-# byebug
 
-count = 0
-total = graph.users.count
-blacklist = ENV['EMAIL_BLACKLIST'].split('|').map{ |s| "#{s}@fsenet.com"}
+User.update_all active: false
 
-graph.users.each do |u|
-  User.find_or_create_by(name: u.display_name, email: u.mail) unless blacklist.include?(u.mail)
+users = graph.groups.select{|g| g.mail == ENV['DIRECTORY_SOURCE']}.first.members
+
+users.each do |u|
+  u = User.find_or_create_by(name: u.display_name, email: u.mail)
+  u.active = true
+  u.save!
 end

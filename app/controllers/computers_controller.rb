@@ -15,16 +15,24 @@ class ComputersController < ApplicationController
   # GET /computers/new
   def new
     @computer = Computer.new
+    gather_active
   end
 
   # GET /computers/1/edit
   def edit
+    gather_active
+  end
+
+  def gather_active
+    @active_users = User.where(active: true).order(:name)
   end
 
   # POST /computers
   # POST /computers.json
   def create
-    @computer = Computer.where(serial: params['computer']['serial'], manufacturer: params['computer']['manufacturer']).sort_by(&:updated_at).last
+    @computer = Computer.where(serial: params['computer']['serial'],
+                               manufacturer: params['computer']['manufacturer'])
+                               .sort_by(&:updated_at).last
     if @computer.nil?
       @computer = Computer.new(fixed_params)
 

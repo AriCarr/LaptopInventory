@@ -14,7 +14,7 @@
   <h4><div class="field">
     <%= f.label :user, "Computer's owner:" %>
     &nbsp
-    <%= f.collection_select :user_id, User.order(:name), :id, :name, selected: current_user.id %>
+    <%= f.collection_select :user_id, @active_users, :id, :name, selected: current_user.id %>
     &nbsp&nbsp
     <%= f.label :status, "Computer's current status:" %>
     &nbsp
