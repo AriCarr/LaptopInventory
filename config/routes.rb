@@ -6,5 +6,7 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
+  get '/seed', to: 'application#seed'
+
   get '/sysinfo', to: 'downloads#sysinfo'
 end

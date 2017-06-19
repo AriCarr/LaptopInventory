@@ -6,6 +6,7 @@
   <div id="navbar">
     <ul class="nav navbar-nav pull-right">
     <% if current_user %>
+        <li><%= link_to "SEED!", seed_path %></li>
         <li><%= link_to "Computers", computers_path %></li>
         <li><%= link_to 'New Computer', new_computer_path %></li>
         <li><%= link_to "Log Out #{current_user.name}...", logout_path, method: :delete %></li>

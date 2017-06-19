@@ -1,7 +1,13 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
-  before_action :store_location, :current_user, :require_login
+  before_action :store_location, except: :seed
+  before_action :current_user, :require_login
   protect_from_forgery with: :exception
+
+  def seed
+    `rails db:seed`
+    redirect_back_or root_path
+  end
 
   private
 

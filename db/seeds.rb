@@ -36,8 +36,11 @@ User.update_all active: false
 
 users = graph.groups.select{|g| g.mail == ENV['DIRECTORY_SOURCE']}.first.members
 
+admins = graph.groups.select{|g| g.mail == ENV['ADMIN_SOURCE']}.first.members.map { |m| m.mail  }
+
 users.each do |u|
-  u = User.find_or_create_by(name: u.display_name, email: u.mail)
-  u.active = true
-  u.save!
+  new_user = User.find_or_create_by(name: u.display_name, email: u.mail)
+  new_user.active = true
+  new_user.is_admin = admins.include? new_user.email
+  new_user.save!
 end
