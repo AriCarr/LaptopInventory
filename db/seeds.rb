@@ -11,7 +11,6 @@
 # require 'byebug'
 
 # authenticate using ADAL
-require 'adal'
 username      = ENV['AUTH_EMAIL']
 password      = ENV['AUTH_PWD']
 client_id     = ENV['OFFICE365_KEY']
