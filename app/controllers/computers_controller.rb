@@ -4,7 +4,8 @@ class ComputersController < ApplicationController
   # GET /computers
   # GET /computers.json
   def index
-    @computers = Computer.all.sort_by(&:possessive_name)
+    computers = current_user.is_admin ? Computer.all : Computer.where(user: current_user)
+    @computers = computers.where(history: false).sort_by(&:possessive_name)
   end
 
   # GET /computers/1
@@ -14,7 +15,7 @@ class ComputersController < ApplicationController
 
   # GET /computers/new
   def new
-    @computer = Computer.new
+    @computer = Computer.new(user: current_user)
     gather_active
   end
 

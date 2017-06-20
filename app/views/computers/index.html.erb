@@ -2,7 +2,7 @@
 
 <h1>Computers</h1>
 
-<% @computers.select { |c| !c.history }.each do |computer| %>
+<% @computers.each do |computer| %>
 <h3><u> <%=link_to "#{computer.title}", computer %> </u></h3>
 <%= render partial: 'root_computer', locals: {computer: computer} %>
 <% end %>
