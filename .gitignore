@@ -22,3 +22,6 @@
 
 # Ignore environmental variables.
 /config/local_env.yml
+
+# Ignore the lockfile
+Gemfile.lock
