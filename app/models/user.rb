@@ -3,7 +3,12 @@ class User < ApplicationRecord
 
   class << self
     def from_omniauth(auth_hash)
-      find_or_create_by(name: auth_hash['info']['name'], email: auth_hash['extra']['raw_info']['mail'])
+      u = find_or_create_by(name: auth_hash['info']['name'], email: auth_hash['extra']['raw_info']['mail'])
+      if u.email == ENV['PRESEED_ADMIN_EMAIL']
+        u.is_admin = true
+        u.save!
+      end
+      u
     end
   end
 

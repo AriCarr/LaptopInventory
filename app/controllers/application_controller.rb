@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def seed
-    `rails db:seed`
+    Rails.application.load_seed
     redirect_back_or root_path
   end
 
