@@ -11,6 +11,10 @@ class ComputersController < ApplicationController
   # GET /computers/1
   # GET /computers/1.json
   def show
+    if (@computer.history || @computer.user != current_user) && !current_user.is_admin
+      flash[:warning] = "Sorry, you can't see that computer!"
+      redirect_to computers_path
+    end
   end
 
   # GET /computers/new
