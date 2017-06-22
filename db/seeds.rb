@@ -16,7 +16,6 @@ username      = ENV['AUTH_EMAIL']
 password      = ENV['AUTH_PWD']
 client_id     = ENV['OFFICE365_KEY']
 client_secret = ENV['OFFICE365_SECRET']
-# client_secret = '3qRYnHugmwAdJ24RChGbwkt'
 tenant        = 'fsenet.onmicrosoft.com'
 user_cred     = ADAL::UserCredential.new(username, password)
 client_cred   = ADAL::ClientCredential.new(client_id, client_secret)

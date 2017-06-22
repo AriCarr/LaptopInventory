@@ -11,7 +11,8 @@ class ComputersController < ApplicationController
   # GET /computers/1
   # GET /computers/1.json
   def show
-    if (@computer.history || @computer.user != current_user) && !current_user.is_admin
+    if (@computer.history ||
+        @computer.user != current_user) && !current_user.is_admin
       flash[:warning] = "Sorry, you can't see that computer!"
       redirect_to computers_path
     end
@@ -35,6 +36,7 @@ class ComputersController < ApplicationController
   # POST /computers
   # POST /computers.json
   def create
+    gather_active
     @computer = Computer.where(serial: params['computer']['serial'],
                                manufacturer: params['computer']['manufacturer'])
                                .sort_by(&:updated_at).last
@@ -82,9 +84,15 @@ class ComputersController < ApplicationController
   def fixed_params
     # byebug
     my_params = computer_params
+    my_params[:wired_mac] = format_mac(computer_params[:wired_mac])
+    my_params[:wireless_mac] = format_mac(computer_params[:wireless_mac])
     my_params[:comment_author] = @current_user.name
     my_params[:comments] = nil if (!@computer.nil? && @computer.comments == computer_params[:comments]) || computer_params[:comments] == ""
     my_params
+  end
+
+  def format_mac(mac)
+    mac.upcase.delete('-:').scan(/\w{2}/).join(':')
   end
 
   # DELETE /computers/1
