@@ -10,6 +10,29 @@ class ComputersController < ApplicationController
 
   def search
     gather_active
+
+    @computers = params[:user] && !params[:user][:id].empty? ? User.find(params[:user][:id]).computers : Computer.all
+
+    @computers = @computers.where(history: false)
+
+    @computers = @computers.to_a
+
+    @computers = @computers.select { |c| c.manufacturer == params[:manufacturer][:manufacturer]} if params[:manufacturer] && !params[:manufacturer][:manufacturer].empty?
+
+    @computers = @computers.select { |c| c.status == params[:status][:status] } if params[:status] && !params[:status][:status].empty?
+
+    @computers = @computers.select { |c| c.serial == params[:serial].upcase} unless params[:serial].empty?
+
+    @computers = @computers.select { |c| c.model.downcase.include? params[:model].downcase } unless params[:model].empty?
+
+    @computers = @computers.select { |c| margin_of_error(c.ram, params[:ram].to_f, 1) } unless params[:ram].empty?
+
+    @computers = @computers.select { |c| margin_of_error(c.space, params[:space].to_f, 50) } unless params[:space].empty?
+
+  end
+
+  def margin_of_error a, b, margin
+    (a-b).abs <= margin
   end
 
   # GET /computers/1
@@ -98,6 +121,7 @@ class ComputersController < ApplicationController
   def fixed_params
     # byebug
     my_params = computer_params
+    my_params[:serial].upcase!
     my_params[:wired_mac] = format_mac(computer_params[:wired_mac])
     my_params[:wireless_mac] = format_mac(computer_params[:wireless_mac])
     my_params[:comment_author] = @current_user.name

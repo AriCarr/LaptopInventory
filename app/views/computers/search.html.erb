@@ -1,4 +1,5 @@
 <%= render partial: 'search_form' %>
 
-<% @computers = Computer.all.where(history: false) %>
+<% @computers = Computer.all.where(history: false) if @computers.nil? %>
+
 <%= render partial: 'root_computer', collection: @computers, as: :computer, spacer_template: 'separator' %>

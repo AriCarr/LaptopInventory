@@ -1,23 +1,16 @@
 <%= form_tag(search_path, :method => "get", id: "search-form") do %>
-  <%if params[:user] %>
-    <%= collection_select :user, :id, @active_users.sort_by{ |u| u.name}, :id, :name, prompt: true, selected: params[:user][:id] %>
-  <%else%>
-    <%= collection_select :user, :id, @active_users.sort_by{ |u| u.name}, :id, :name, prompt: true%>
-  <%end%>
 
-  <%if params[:manufacturer] %>
-    <%= select :manufacturer, :manufacturer, Computer.manufacturers.keys.to_a, selected: params[:manufacturer][:manufacturer] %>
-  <%else%>
-    <%= select :manufacturer, :manufacturer, Computer.manufacturers.keys.to_a %>
-  <%end%>
+  <%= collection_select :user, :id, @active_users.sort_by{ |u| u.name}, :id, :name, prompt: "Owner"%>
 
-  <%if params[:status] %>
-    <%= select :status, :status, Computer.statuses.collect { |s| [s[0].humanize, s[0]] }, selected: params[:status][:status] %>
-  <%else%>
-    <%= select :status, :status, Computer.statuses.collect { |s| [s[0].humanize, s[0]] } %>
-  <%end%>
+  <%= select :manufacturer, :manufacturer, Computer.manufacturers.keys.to_a, prompt: "Manufacturer" %>
 
-  <%= text_field_tag :search, params[:search], placeholder: "Search" %>
+  <%= select :status, :status, Computer.statuses.collect { |s| [s[0].humanize, s[0]] }, prompt: "Status" %>
+
+  <%= text_field_tag :model, params[:model], placeholder: "Model name" %>
+  <%= text_field_tag :serial, params[:serial], placeholder: "Serial number" %>
+  <%= text_field_tag :ram, params[:ram], placeholder: "RAM" %>
+  <%= text_field_tag :space, params[:space], placeholder: "HD size" %>
+
   <%= submit_tag "Search", :name => nil %>
 
 <% end %>
