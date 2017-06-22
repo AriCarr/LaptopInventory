@@ -8,6 +8,10 @@ class ComputersController < ApplicationController
     @computers = computers.where(history: false).sort_by(&:possessive_name)
   end
 
+  def search
+    gather_active
+  end
+
   # GET /computers/1
   # GET /computers/1.json
   def show
@@ -15,6 +19,16 @@ class ComputersController < ApplicationController
         @computer.user != current_user) && !current_user.is_admin
       flash[:warning] = "Sorry, you can't see that computer!"
       redirect_to computers_path
+    end
+    gather_parents
+  end
+
+  def gather_parents
+    @parents = []
+    parent = @computer.parent
+    while !parent.nil? do
+      @parents << parent
+      parent = parent.parent
     end
   end
 

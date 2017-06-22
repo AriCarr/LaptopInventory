@@ -8,5 +8,7 @@ Rails.application.routes.draw do
 
   get '/seed', to: 'application#seed'
 
+  get '/search', to: 'computers#search'
+
   get '/sysinfo', to: 'downloads#sysinfo'
 end

@@ -1,5 +1,4 @@
-<p id="notice"><%= notice %></p>
+<%= render partial: 'search_form' %>
 
-<h1>Computers</h1>
-
+<% @computers = Computer.all.where(history: false) %>
 <%= render partial: 'root_computer', collection: @computers, as: :computer, spacer_template: 'separator' %>
