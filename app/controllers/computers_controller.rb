@@ -10,7 +10,10 @@ class ComputersController < ApplicationController
 
   def search
     gather_active
+    index
+  end
 
+  def search_results
     @computers = params[:user] && !params[:user][:id].empty? ? User.find(params[:user][:id]).computers : Computer.all
 
     @computers = @computers.where(history: false)
@@ -29,6 +32,9 @@ class ComputersController < ApplicationController
 
     @computers = @computers.select { |c| margin_of_error(c.space, params[:space].to_f, 50) } unless params[:space].empty?
 
+    respond_to do |format|
+      format.js
+    end
   end
 
   def margin_of_error a, b, margin
