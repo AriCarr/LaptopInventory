@@ -5,9 +5,9 @@
 <div class="tab-content">
   <div id="pc" class="tab-pane fade in active">
     <% list_init %>
-    <%= render partial: 'pc_form', locals: {computer: @computer} %>
+    <%= render partial: 'pc_form', locals: {computer: @computer, url: nil} %>
   </div>
   <div id="mac" class="tab-pane fade">
-    <%= render partial: 'mac_form', locals: {computer: @computer} %>
+    <%= render partial: 'mac_form', locals: {computer: @computer, url: nil} %>
   </div>
 </div>

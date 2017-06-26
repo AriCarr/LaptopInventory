@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
-  before_action :store_location, except: :seed
+  before_action :store_location, except: [:seed, :require_admin]
   before_action :current_user, :require_login
   protect_from_forgery with: :exception
 
@@ -21,6 +21,14 @@ class ApplicationController < ActionController::Base
       redirect_to '/auth/office365'
     end
   end
+
+  def require_admin
+    if !current_user.is_admin
+      flash[:warning] = "Sorry, you need admin rights to do that!"
+      redirect_to root_path
+    end
+  end
+
 
   helper_method :current_user
 end

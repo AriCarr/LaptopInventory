@@ -1,5 +1,7 @@
 class ComputersController < ApplicationController
-  before_action :set_computer, only: [:show, :edit, :update, :destroy]
+  before_action :set_computer, only: [:show, :edit, :update, :overwrite, :inplace, :destroy]
+  before_action :gather_active
+  before_action :require_admin, only: [:search, :search_results, :edit, :update, :overwrite, :inplace]
 
   # GET /computers
   # GET /computers.json
@@ -79,7 +81,6 @@ class ComputersController < ApplicationController
   # POST /computers
   # POST /computers.json
   def create
-    gather_active
     @computer = Computer.where(serial: params['computer']['serial'],
                                manufacturer: params['computer']['manufacturer'])
                                .sort_by(&:updated_at).last
@@ -105,6 +106,7 @@ class ComputersController < ApplicationController
   # PATCH/PUT /computers/1
   # PATCH/PUT /computers/1.json
   def update
+    puts caller[0]
     set_parent if @computer.history != true
     respond_to do |format|
       if @computer.update(fixed_params)
@@ -124,8 +126,30 @@ class ComputersController < ApplicationController
     @computer.parent = parent
   end
 
+  # GET /computers/overwrite/1
+  # GET /computers/overwrite/1.json
+  def overwrite
+    gather_active
+  end
+
+  def inplace
+    respond_to do |format|
+      if @computer.update(fixed_params)
+        format.html { redirect_to find_child(@computer) }
+        format.json { render :show, status: :ok, location: @computer }
+      else
+        format.html { render :edit }
+        format.json { render json: @computer.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def find_child(current)
+    child = Computer.where(computer: current).first
+    child.nil? ? current : find_child(child)
+  end
+
   def fixed_params
-    # byebug
     my_params = computer_params
     my_params[:serial].upcase!
     my_params[:wired_mac] = format_mac(computer_params[:wired_mac])

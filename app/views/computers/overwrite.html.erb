@@ -1,0 +1,7 @@
+<h3>Overwriting <%= "#{@computer.possessive_name} | #{@computer.date}" %></h3>
+
+<% list_init %>
+
+<%= render "#{@computer.Apple? ? 'mac' : 'pc'}_form", computer: @computer, url: inplace_computer_path(@computer) %>
+
+<%= link_to 'Back', computers_path %>

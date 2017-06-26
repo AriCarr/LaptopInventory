@@ -1,4 +1,4 @@
-<%= form_for(computer) do |f| %>
+<%= form_for(computer, url: url) do |f| %>
   <% if computer.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(computer.errors.count, "error") %> prohibited this computer from being saved:</h2>

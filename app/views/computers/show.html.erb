@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<h2> <%= "#{@computer.title} | " %>
-<u><%= link_to 'Edit', edit_computer_path(@computer) %></u> </h2>
+<h2> <%= "#{@computer.title}" %>
+<u><%= " | #{link_to 'Edit', edit_computer_path(@computer)}" if current_user.is_admin %></u> </h2>
 <%= render partial: 'root_computer', locals: {computer: @computer} %>
 
 <hr>

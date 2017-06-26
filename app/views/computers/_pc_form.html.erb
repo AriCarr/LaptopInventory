@@ -1,4 +1,4 @@
-<%= form_for(computer) do |f| %>
+<%= form_for(computer, url: url) do |f| %>
   <% if computer.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(computer.errors.count, "error") %> prohibited this computer from being saved:</h2>
@@ -114,8 +114,12 @@
       <li>Network issues</li>
       <li>Unexpected shutdowns/reboots</li>
       <li>Performance issues</li>
-      <li></li>
+      <li>Port issues</li>
+      <li>Screen issues</li>
   </strong></ul></h5>
+
+  <h5><strong>Please be as detailed as possible when describing these issues so we can troubleshoot and follow up with you.</strong></h5>
+
 
   <div class="field">
     <%= f.text_field :comments, :size => 140 %>

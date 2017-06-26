@@ -5,3 +5,5 @@
 <% if computer.comments %>
 <h4><%= "Comments: \"#{computer.comments}\" -#{computer.comment_author}" %></h4>
 <% end %>
+
+<h5><u><%= link_to 'Overwrite', overwrite_computer_path(computer) if current_user.is_admin %></u><h5>
