@@ -14,17 +14,17 @@ class ComputersController < ApplicationController
   end
 
   def search_results
-    @computers = params[:user] && !params[:user][:id].empty? ? User.find(params[:user][:id]).computers : Computer.all
+    @computers = !params[:user][:id].empty? ? User.find(params[:user][:id]).computers : Computer.all
 
     @computers = @computers.where(history: false)
 
     @computers = @computers.to_a
 
-    @computers = @computers.select { |c| c.manufacturer == params[:manufacturer][:manufacturer]} if params[:manufacturer] && !params[:manufacturer][:manufacturer].empty?
+    @computers = @computers.select { |c| c.manufacturer == params[:manufacturer][:manufacturer]} if !params[:manufacturer][:manufacturer].empty?
 
-    @computers = @computers.select { |c| c.status == params[:status][:status] } if params[:status] && !params[:status][:status].empty?
+    @computers = @computers.select { |c| c.status == params[:status][:status] } if !params[:status][:status].empty?
 
-    @computers = @computers.select { |c| c.serial == params[:serial].upcase} unless params[:serial].empty?
+    @computers = @computers.select { |c| c.serial == params[:serial].upcase } unless params[:serial].empty?
 
     @computers = @computers.select { |c| c.model.downcase.include? params[:model].downcase } unless params[:model].empty?
 
@@ -37,7 +37,7 @@ class ComputersController < ApplicationController
     end
   end
 
-  def margin_of_error a, b, margin
+  def margin_of_error(a, b, margin)
     (a-b).abs <= margin
   end
 

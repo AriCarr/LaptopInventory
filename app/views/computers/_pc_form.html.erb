@@ -108,11 +108,20 @@
 
   <hr>
 
+  <h4> <%=list%> Any additional comments? Things like:</h4>
+
+  <h5><ul><strong>
+      <li>Network issues</li>
+      <li>Unexpected shutdowns/reboots</li>
+      <li>Performance issues</li>
+      <li></li>
+  </strong></ul></h5>
+
   <div class="field">
-    <%= f.label :comments, "<h4>#{list} Any additional comments:</h4>".html_safe %>
-    &nbsp
     <%= f.text_field :comments, :size => 140 %>
   </div>
+
+  <hr>
 
   <div class="actions">
     <%= f.submit "Submit" %>
