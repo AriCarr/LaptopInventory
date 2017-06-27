@@ -36,11 +36,15 @@ User.update_all active: false
 
 users = graph.groups.select{|g| g.mail == ENV['DIRECTORY_SOURCE']}.first.members
 
-admins = graph.groups.select{|g| g.mail == ENV['ADMIN_SOURCE']}.first.members.map { |m| m.mail  }
-
+# admins = graph.groups.select{|g| g.mail == ENV['ADMIN_SOURCE']}.first.members.map { |m| m.mail  }
+admins = ENV['ADMIN_LIST'].split('|').map { |s| "#{s}@fsenet.com"}
 users.each do |u|
   new_user = User.find_or_create_by(name: u.display_name, email: u.mail)
   new_user.active = true
-  new_user.is_admin = admins.include? new_user.email
+  new_user.is_admin = admins.include? new_user.email.downcase
   new_user.save!
 end
+
+loaner = User.find_or_create_by(name: 'Loaner', email: 'loaner@fsenet.com')
+loaner.active = true
+loaner.save!
