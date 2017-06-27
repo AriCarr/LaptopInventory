@@ -1,15 +1,26 @@
 <%= form_tag(search_results_path, :method => "get", id: "search-form", remote: true) do %>
 
   <%= collection_select :user, :id, @active_users.sort_by{ |u| u.name}, :id, :name, prompt: "Owner"%>
+  &nbsp
 
   <%= select :manufacturer, :manufacturer, Computer.manufacturers.keys.to_a, prompt: "Manufacturer" %>
+  &nbsp
 
   <%= select :status, :status, Computer.statuses.collect { |s| [s[0].humanize, s[0]] }, prompt: "Status" %>
+  &nbsp
 
   <%= text_field_tag :model, params[:model], placeholder: "Model name" %>
+  &nbsp
+
   <%= text_field_tag :serial, params[:serial], placeholder: "Serial number" %>
-  <%= text_field_tag :ram, params[:ram], placeholder: "RAM" %>
-  <%= text_field_tag :space, params[:space], placeholder: "HD size" %>
+  &nbsp
+
+  <%= text_field_tag :ram, params[:ram], placeholder: "RAM", size: 1 %> <strong>GB</strong>
+  &nbsp
+
+  <%= text_field_tag :space, params[:space], placeholder: "HD size", size: 3 %>
+  <strong>GB</strong>
+  &nbsp
 
   <%= submit_tag "Search", :name => nil %>
 

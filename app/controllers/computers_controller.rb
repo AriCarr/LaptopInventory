@@ -106,7 +106,6 @@ class ComputersController < ApplicationController
   # PATCH/PUT /computers/1
   # PATCH/PUT /computers/1.json
   def update
-    puts caller[0]
     set_parent if @computer.history != true
     respond_to do |format|
       if @computer.update(fixed_params)

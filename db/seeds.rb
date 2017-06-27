@@ -6,12 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# require 'adal'
-# require 'microsoft_graph'
-# require 'byebug'
-
-# authenticate using ADAL
-require 'adal'
 username      = ENV['AUTH_EMAIL']
 password      = ENV['AUTH_PWD']
 client_id     = ENV['OFFICE365_KEY']
@@ -40,6 +34,7 @@ users = graph.groups.select{|g| g.mail == ENV['DIRECTORY_SOURCE']}.first.members
 admins = ENV['ADMIN_LIST'].split('|').map { |s| "#{s}@fsenet.com"}
 users.each do |u|
   new_user = User.find_or_create_by(name: u.display_name, email: u.mail)
+  puts new_user.name
   new_user.active = true
   new_user.is_admin = admins.include? new_user.email.downcase
   new_user.save!
