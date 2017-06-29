@@ -1,5 +1,5 @@
-<%- headers = ['Owner', 'Serial', 'Manufacturer', 'Status'] -%>
-<%= CSV.generate_line headers %>
+<%- headers = ['Owner', 'Manufacturer', 'Model', 'Status', 'Serial Number', 'Product Number', 'Processor Speed', 'RAM', 'Storage'] -%>
+<%= CSV.generate_line(headers).html_safe %>
 <%- @computers.each do |computer| -%>
-<%= CSV.generate_line([computer.owner.name, computer.serial, computer.manufacturer, computer.status.humanize]) -%>
+<%= CSV.generate_line([computer.owner.name, computer.manufacturer, computer.model, computer.status.humanize, computer.serial, computer.product, "#{computer.processor} GHz", "#{computer.ram} GB", "#{computer.space} GB"]).html_safe -%>
 <%- end -%>
