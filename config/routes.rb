@@ -5,6 +5,9 @@ Rails.application.routes.draw do
       get :overwrite, as: 'overwrite'
       patch :inplace, as: 'inplace'
     end
+    collection do
+      post :download_csv
+    end
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -16,6 +19,7 @@ Rails.application.routes.draw do
   get '/seed', to: 'application#seed'
 
   get '/search', to: 'computers#search'
+  post '/search', to: 'computers#search'
 
   get '/sysinfo', to: 'downloads#sysinfo'
 

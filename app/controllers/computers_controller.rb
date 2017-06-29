@@ -1,4 +1,5 @@
 class ComputersController < ApplicationController
+  require 'csv'
   before_action :set_computer, only: [:show, :edit, :update, :overwrite, :inplace, :destroy]
   before_action :gather_active
   before_action :require_admin, only: [:search, :search_results, :edit, :update, :overwrite, :inplace]
@@ -8,6 +9,16 @@ class ComputersController < ApplicationController
   def index
     computers = current_user.is_admin ? Computer.all : Computer.where(user: current_user)
     @computers = computers.where(history: false).sort_by(&:possessive_name)
+  end
+
+  def download_csv
+    @computers = params[:computers].map { |x| Computer.find(x) }
+    respond_to do |format|
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"#{params[:filename]}_#{DateTime.now.strftime("%Y-%m-%d_%H-%M-%S")}\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
+    end
   end
 
   def search

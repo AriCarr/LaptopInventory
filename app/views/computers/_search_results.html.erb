@@ -1,3 +1,9 @@
-<% @computers = Computer.all.where(history: false) if @computers.nil? %>
+<hr>
+
+<div id = "download_buttons" class="download_buttons">
+<%= button_to "Download all computers as CSV", download_csv_computers_path(computers: Computer.where(history: false).to_a, filename: 'all-computers', format: :csv), class: "btn btn-primary" %>
+
+<%= button_to "Download current search results as CSV", download_csv_computers_path(computers: @computers, filename: 'search-results', format: :csv), class: "btn btn-success" unless @computers.length == Computer.where(history: false).count %>
+</div>
 
 <%= render partial: 'root_computer', collection: @computers, as: :computer, spacer_template: 'separator' %>
