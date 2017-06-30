@@ -15,7 +15,7 @@ class ComputersController < ApplicationController
     @computers = params[:computers].map { |x| Computer.find(x) }
     respond_to do |format|
       format.csv do
-        headers['Content-Disposition'] = "attachment; filename=\"#{params[:filename]}_#{DateTime.now.strftime("%Y-%m-%d_%H-%M-%S")}\""
+        headers['Content-Disposition'] = "attachment; filename=\"#{params[:filename]}_#{DateTime.now.strftime("%Y-%m-%d_%H-%M-%S")}.csv\""
         headers['Content-Type'] ||= 'text/csv'
       end
     end
