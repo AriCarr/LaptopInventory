@@ -2,6 +2,6 @@
 
 <% list_init %>
 
-<%= render partial: "#{@computer.Apple? ? 'mac' : 'pc'}_form", locals: {computer: @computer, url: nil} %>
+<%= render 'form_decider', url: nil %>
 
 <%= link_to 'Back', computers_path %>

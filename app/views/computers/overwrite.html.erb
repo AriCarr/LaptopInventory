@@ -2,6 +2,6 @@
 
 <% list_init %>
 
-<%= render "#{@computer.Apple? ? 'mac' : 'pc'}_form", computer: @computer, url: inplace_computer_path(@computer) %>
+<%= render 'form_decider', url: inplace_computer_path(@computer) %>
 
 <%= link_to 'Back', computers_path %>
