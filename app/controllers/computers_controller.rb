@@ -166,8 +166,9 @@ class ComputersController < ApplicationController
     my_params[:wireless_mac] = format_mac(computer_params[:wireless_mac])
     if action_name != 'inplace'
       my_params[:comment_author] = @current_user.name
-      my_params[:comments] = nil if (!@computer.nil? && @computer.comments == computer_params[:comments]) || computer_params[:comments] == ""
+      my_params[:comments] = nil if (!@computer.nil? && @computer.comments == computer_params[:comments])
     end
+    my_params[:comments] = nil if computer_params[:comments] == ""
     my_params
   end
 
