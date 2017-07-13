@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Users who haven't logged a computer yet</h1>
+<h1><%=@holdouts.count%> users who haven't logged a computer yet:</h1>
 
 <ul>
 <%= render partial: 'holdout', collection: @holdouts, as: :user%>
