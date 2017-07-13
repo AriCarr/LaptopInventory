@@ -29,7 +29,7 @@ class Computer < ApplicationRecord
   end
 
   def macs
-    "Wired MAC: #{wired_mac} | Wireless MAC: #{wireless_mac}"
+    "#{"Wired MAC: #{wired_mac} | " unless wired_mac.empty?}Wireless MAC: #{wireless_mac}"
   end
 
 end

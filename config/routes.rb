@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   get '/search', to: 'computers#search'
   post '/search', to: 'computers#search'
 
+  get '/holdouts', to: 'users#holdouts'
+
   get '/sysinfo', to: 'downloads#sysinfo'
 
   get '/search_results', to: 'computers#search_results', as: 'search_results'
