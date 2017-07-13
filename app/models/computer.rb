@@ -7,7 +7,7 @@ class Computer < ApplicationRecord
 
   validates :serial, presence: true, allow_blank: false
   validates :ram, :processor, :space, numericality: true
-  validates :wired_mac, :wireless_mac, mac_address: true
+  validates :wired_mac, :wireless_mac, mac_address: true, allow_blank: true
 
   enum status: [ :in_use, :available, :junk ]
   enum manufacturer: [ :"Apple", :"Dell", :"HP", :"Lenovo", :"Microsoft", :"Other" ]
