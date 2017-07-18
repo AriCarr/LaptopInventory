@@ -76,8 +76,9 @@ class ComputersController < ApplicationController
 
   # GET /computers/new
   def new
-    @computer = Computer.new(user: current_user)
     gather_active
+    owner = (@active_users.include? current_user) ? current_user : User.where(name: current_user.name).first
+    @computer = Computer.new(user: owner)
   end
 
   # GET /computers/1/edit
