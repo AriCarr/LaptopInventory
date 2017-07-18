@@ -22,8 +22,12 @@ class ComputersController < ApplicationController
   end
 
   def search
-    gather_active
+    gather_owners
     index
+  end
+
+  def gather_owners
+    @owners = Computer.all.map(&:owner).uniq.sort_by { |u| u.name  }
   end
 
   def search_results

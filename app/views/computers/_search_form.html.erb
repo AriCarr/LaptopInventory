@@ -1,6 +1,6 @@
 <%= form_tag(search_results_path, :method => "get", id: "search-form", remote: true) do %>
 
-  <%= collection_select :user, :id, @active_users.sort_by{ |u| u.name}, :id, :name, prompt: "Owner"%>
+  <%= collection_select :user, :id, @owners, :id, :name, prompt: "Owner"%>
   &nbsp
 
   <%= select :manufacturer, :manufacturer, Computer.manufacturers.keys.to_a, prompt: "Manufacturer" %>
