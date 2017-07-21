@@ -6,4 +6,6 @@
 <%= button_to "Download current search results as CSV", download_csv_computers_path(computers: @computers, filename: 'search-results', format: :csv), class: "btn btn-success" unless @computers.length == Computer.where(history: false).count %>
 </div>
 
+<h2><%= pluralize(@computers.count, 'computer') %></h2>
+
 <%= render partial: 'root_computer', collection: @computers, as: :computer, spacer_template: 'separator' %>

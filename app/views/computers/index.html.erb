@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Computers</h1>
+<h1><%= pluralize(@computers.count, 'computer') %></h1>
 
 <%= render partial: 'root_computer', collection: @computers, as: :computer, spacer_template: 'separator' %>
