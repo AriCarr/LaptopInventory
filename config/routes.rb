@@ -23,8 +23,7 @@ Rails.application.routes.draw do
 
   get '/holdouts', to: 'users#holdouts'
 
-  get '/sysinfo_64', to: 'downloads#sysinfo_64'
-  get '/sysinfo_32', to: 'downloads#sysinfo_32'
+  get '/sysinfo', to: 'downloads#sysinfo'
 
   get '/search_results', to: 'computers#search_results', as: 'search_results'
 end
