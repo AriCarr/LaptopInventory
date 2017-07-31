@@ -1,11 +1,15 @@
 class DownloadsController < ApplicationController
 
   def sysinfo_64
-    send_file "#{Rails.root}/public/HWiNFO64.exe", filename: "HWiNFO64.exe"
+    sysinfo('64')
   end
 
   def sysinfo_32
-    send_file "#{Rails.root}/public/HWiNFO64.exe", filename: "HWiNFO32.exe"
+    sysinfo('32')
+  end
+
+  def sysinfo(bits)
+    send_file "#{Rails.root}/public/HWiNFO#{bits}.exe", filename: "HWiNFO#{bits}.exe"
   end
 
 end
