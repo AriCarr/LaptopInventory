@@ -9,4 +9,8 @@ module ComputersHelper
     "#{@list_counter}."
   end
 
+  def sysinfo_link(text, bits)
+    link_to text, sysinfo_path(bits: bits), download: ''
+  end
+
 end
