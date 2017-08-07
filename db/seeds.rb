@@ -1,10 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 username      = ENV['AUTH_EMAIL']
 password      = ENV['AUTH_PWD']
 client_id     = ENV['OFFICE365_KEY']
@@ -29,8 +22,7 @@ User.update_all active: false
 
 users = graph.groups.select{|g| g.mail == ENV['DIRECTORY_SOURCE']}.first.members
 
-# admins = graph.groups.select{|g| g.mail == ENV['ADMIN_SOURCE']}.first.members.map { |m| m.mail  }
-admins = ENV['ADMIN_LIST'].split('|').map { |s| "#{s}@fsenet.com"}
+admins = graph.groups.select{|g| g.mail == ENV['ADMIN_SOURCE']}.first.members.map { |m| m.mail  }
 users.each do |u|
   new_user = User.find_or_create_by(name: u.display_name, email: u.mail)
   new_user.active = true
